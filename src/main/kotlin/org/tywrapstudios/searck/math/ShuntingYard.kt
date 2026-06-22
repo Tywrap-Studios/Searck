@@ -10,6 +10,7 @@ import java.util.Stack
 object ShuntingYard {
     val OPS = mutableMapOf<String, IOperator>()
     val FUNCTIONS = mutableMapOf<String, IOperator>()
+    val FUNCTION_CHARS = mutableSetOf<Char>()
     private val LOGGER = LoggerFactory.getLogger(javaClass)
 
     init {
@@ -17,6 +18,9 @@ object ShuntingYard {
             OPS[operator.symbol] = operator
             if (operator.symbol.length > 1) {
                 FUNCTIONS[operator.symbol] = operator
+                for (c in operator.symbol) {
+                    FUNCTION_CHARS.add(c)
+                }
             }
         }
     }
@@ -58,12 +62,13 @@ object ShuntingYard {
                 LOGGER.debug("[Prepare] added token: $s")
             } else if(s.matches("[a-z]".toRegex())) {
                 LOGGER.debug("[Prepare] possible function found")
-                for ((i2, c) in chars.withIndex()) {
-                    if (c.toString().matches("[a-z]".toRegex())) {
-                        function.append(c)
-                        LOGGER.debug("[Prepare] function loop, add $c. New: {}", function)
+                for (i2 in i..chars.lastIndex) {
+                    val possibleChar = chars[i2]
+                    if (FUNCTION_CHARS.contains(possibleChar)) {
+                        function.append(possibleChar)
+                        LOGGER.debug("[Prepare] function loop, add $possibleChar. New: {}", function)
                     } else {
-                        LOGGER.debug("[Prepare] function loop, break on $c. Final: {}", function)
+                        LOGGER.debug("[Prepare] function loop, break on $possibleChar. Final: {}", function)
                         break
                     }
                 }
@@ -95,7 +100,7 @@ object ShuntingYard {
     private fun processCache(cache: Stack<String>, tokens: MutableList<String>): String {
         val final = StringBuilder()
         LOGGER.debug("[Process Cache] started: {}", cache)
-        for (i in cache.indices) {
+        while (cache.isNotEmpty()) {
             val first = cache.removeFirst()
             final.append(first)
             LOGGER.debug("[Process Cache] grabbed: {}", first)
