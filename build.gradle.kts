@@ -1,6 +1,7 @@
 plugins {
     // This plugin applies the correct loom variant based on the Minecraft version
     id("dev.kikugie.loom-back-compat")
+    kotlin("jvm") version "2.4.0"
 }
 
 // DO NOT set group = ...!
@@ -47,13 +48,20 @@ dependencies {
 
     // Use `mod{dependency type}` even on 26.1+ - loom-back-compat converts them
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-registry-sync-v0")
+    modImplementation("net.fabricmc:fabric-language-kotlin:${property("deps.flk")}")
+
+    if (sc.current.parsed < "26.1") {
+        fapi("fabric-key-binding-api-v1")
+    } else {
+        fapi("fabric-key-mapping-api-v1")
+    }
+    fapi("fabric-lifecycle-events-v1")
 }
 
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json") // Useful for interface injection
     accessWidenerPath = sc.process(
-        rootProject.file("src/main/resources/template.ct"),
+        rootProject.file("src/main/resources/${property("mod.id")}.ct"),
         "build/processed.ct"
     )
 
@@ -77,6 +85,13 @@ java {
     toolchain {
         vendor = JvmVendorSpec.ADOPTIUM
         languageVersion = JavaLanguageVersion.of(requiredJava.majorVersion)
+    }
+}
+
+kotlin {
+    jvmToolchain(requiredJava.majorVersion.toInt())
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(requiredJava.majorVersion))
     }
 }
 

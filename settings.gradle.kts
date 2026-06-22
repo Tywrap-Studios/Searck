@@ -24,10 +24,12 @@ plugins {
 stonecutter {
     create(rootProject) {
         // See https://stonecutter.kikugie.dev/wiki/start/#choosing-minecraft-versions
-        versions("1.21.1", "1.21.11")
+        versions("1.21.11")
+        version("1.21.x", "1.21.1")
+        version("26.1.x", "26.1.2")
         version("26.2.x", "26.2")
         vcsVersion = "26.2.x"
     }
 }
 
-rootProject.name = "Template Fabric"
+rootProject.name = "Searck"

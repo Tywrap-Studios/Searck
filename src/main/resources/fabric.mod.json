@@ -3,28 +3,34 @@
   "id": "${id}",
   "version": "${version}",
   "name": "${name}",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "A simple Minecraft mod that adds a Satisfactory-style, promptly available search bar.",
   "authors": [
-    "Me!"
+    "Tywrap Studios"
   ],
   "contact": {
-    "homepage": "https://stonecutter.kikugie.dev/",
-    "sources": "https://codeberg.org/stonecutter/template-fabric"
+    "homepage": "https://tywrap-studios.tiazzz.me",
+    "sources": "https://github.com/Tywrap-Studios/Searck",
+    "issues": "https://github.com/Tywrap-Studios/Searck/issues",
+    "email": "business+searck@tywrap-studios.tiazzz.me"
   },
-  "license": "CC0-1.0",
-  "icon": "assets/template/icon.png",
+  "license": "TYSPAL-3.0",
+  "icon": "assets/searck/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "com.example.TemplateMod"
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "org.tywrapstudios.searck.Searck"
+      }
     ]
   },
   "mixins": [
-    "template.mixins.json"
+    "searck.mixins.json"
   ],
-  "accessWidener": "template.ct",
+  "accessWidener": "searck.ct",
   "depends": {
     "fabricloader": ">=0.17",
-    "minecraft": "${minecraft}"
+    "minecraft": "${minecraft}",
+    "fabric-language-kotlin": ">=1.13.12+kotlin.2.4.0"
   }
 }
