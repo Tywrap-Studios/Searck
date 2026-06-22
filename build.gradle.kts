@@ -50,6 +50,9 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc:fabric-language-kotlin:${property("deps.flk")}")
 
+    // FuzzyKot
+    implementation("com.github.terrakok:fuzzykot:${property("deps.fuzzykot")}")
+
     if (sc.current.parsed < "26.1") {
         fapi("fabric-key-binding-api-v1")
     } else {
