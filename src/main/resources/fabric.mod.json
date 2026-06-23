@@ -22,6 +22,12 @@
         "adapter": "kotlin",
         "value": "org.tywrapstudios.searck.Searck"
       }
+    ],
+    "fabric-datagen": [
+      {
+        "adapter": "kotlin",
+        "value": "org.tywrapstudios.searck.util.datagen.SearckDataGenerator"
+      }
     ]
   },
   "mixins": [

@@ -58,7 +58,7 @@ dependencies {
     } else {
         fapi("fabric-key-mapping-api-v1")
     }
-    fapi("fabric-lifecycle-events-v1")
+    fapi("fabric-lifecycle-events-v1", "fabric-data-generation-api-v1")
 }
 
 loom {
@@ -77,6 +77,12 @@ loom {
         generateRunConfig = true
         runDirectory = rootProject.file("run") // Shares the run directory between versions
         jvmArguments.add("-Dmixin.debug.export=true") // Exports transformed classes for debugging
+    }
+}
+
+fabricApi {
+    configureDataGeneration {
+        client = true
     }
 }
 
