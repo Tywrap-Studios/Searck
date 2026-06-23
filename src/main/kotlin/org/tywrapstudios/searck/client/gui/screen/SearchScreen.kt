@@ -8,8 +8,8 @@ import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.input.KeyEvent
 import net.minecraft.network.chat.Component
+import net.minecraft.util.ARGB
 import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
 import org.tywrapstudios.searck.Searck
 import org.tywrapstudios.searck.client.key.SearckKeys
 import org.tywrapstudios.searck.math.StringCalculator
@@ -33,6 +33,9 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
 
     override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
         super.extractRenderState(graphics, mouseX, mouseY, a)
+
+        graphics.text(this.font, Component.translatable("gui.searck.search_screen.title"), this.width / 2 - 150, this.height / 2 - 80, ARGB.white(255))
+
         val value = input.value
         if (value.isEmpty()) return
 
