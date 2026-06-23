@@ -8,6 +8,7 @@ import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.input.KeyEvent
 import net.minecraft.network.chat.Component
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import org.tywrapstudios.searck.Searck
 import org.tywrapstudios.searck.client.key.SearckKeys
@@ -20,7 +21,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
     var lastValue = ""
     var lastSolution = 0.0
     val tooltipList = mutableListOf<Component>()
-    val itemList = mutableListOf<ItemStack>()
+    val itemList = mutableListOf<Item>()
 
     override fun init() {
         ItemIndex.indexIfNotInitialized()
@@ -58,10 +59,10 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                     Searck.LOGGER.debug("After sort: {}", group)
                     group.forEach {
                         ItemIndex.getItemsForName(it).forEach { item ->
-                            if (item.isEmpty) {
+                            if (item.defaultInstance.isEmpty) {
                                 tooltipList.add(Component.literal(it))
                             } else {
-                                tooltipList.add(item.styledHoverName)
+                                tooltipList.add(item.defaultInstance.styledHoverName)
                             }
                             itemList.add(item)
                         }
