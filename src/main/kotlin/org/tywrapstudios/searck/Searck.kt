@@ -8,6 +8,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.tywrapstudios.searck.client.gui.screen.SearchScreen
 import org.tywrapstudios.searck.client.key.SearckKeys
+import org.tywrapstudios.searck.search.ItemIndex
 
 object Searck : ClientModInitializer {
     const val MOD_ID = /*$ mod_id*/ "searck"
@@ -16,6 +17,7 @@ object Searck : ClientModInitializer {
 
     override fun onInitializeClient() {
         SearckKeys.register()
+        ItemIndex.register()
 
         events()
     }

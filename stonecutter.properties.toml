@@ -34,4 +34,4 @@ deps.fabric_api = "0.152.1+26.1.2"
 mod.mc_compat = "~26.2"
 mod.mc_releases = ["26.2"]
 
-deps.fabric_api = "0.152.2+26.2"
+deps.fabric_api = "0.153.0+26.2"

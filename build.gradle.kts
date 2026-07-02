@@ -56,9 +56,14 @@ dependencies {
     if (sc.current.parsed < "26.1") {
         fapi("fabric-key-binding-api-v1")
     } else {
-        fapi("fabric-key-mapping-api-v1")
+        fapi("fabric-key-mapping-api-v1",
+            "fabric-resource-loader-v1"
+        )
     }
-    fapi("fabric-lifecycle-events-v1", "fabric-data-generation-api-v1")
+    fapi(
+        "fabric-lifecycle-events-v1",
+        "fabric-data-generation-api-v1",
+    )
 }
 
 loom {

@@ -1,15 +1,13 @@
 package org.tywrapstudios.searck.search
 
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader
 import net.minecraft.client.resources.language.ClientLanguage
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.server.packs.resources.ReloadableResourceManager
+import net.minecraft.server.packs.PackType
 import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener
-import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
 import org.tywrapstudios.searck.Searck
-import org.tywrapstudios.searck.Searck.client
 
 object ItemIndex : ResourceManagerReloadListener {
     private var initialized = false
@@ -40,7 +38,7 @@ object ItemIndex : ResourceManagerReloadListener {
                 Searck.LOGGER.debug("   isItem: $isItem")
                 Searck.LOGGER.debug("   ID: $namespace:$path")
                 Searck.LOGGER.debug("   given: $translation")
-                Searck.LOGGER.debug("   shown: ${item.defaultInstance.styledHoverName.string}")
+//                Searck.LOGGER.debug("   shown: ${item.defaultInstance.styledHoverName.string}")
                 Searck.LOGGER.debug("Cached item {}", item)
                 cache[key] = translation to item
             }
@@ -50,14 +48,14 @@ object ItemIndex : ResourceManagerReloadListener {
     }
 
     fun indexIfNotInitialized() {
-        Searck.LOGGER.info("Requested index, initialisation needed: ${!initialized}")
-        if (!initialized) {
-            Searck.LOGGER.info("Initializing indexing")
-            (client.resourceManager as ReloadableResourceManager)
-                .registerReloadListener(ItemIndex)
-            index()
-            initialized = true
-        }
+//        Searck.LOGGER.info("Requested index, initialisation needed: ${!initialized}")
+//        if (!initialized) {
+//            Searck.LOGGER.info("Initializing indexing")
+//            (client.resourceManager as ReloadableResourceManager)
+//                .registerReloadListener(ItemIndex)
+//            index()
+//            initialized = true
+//        }
     }
 
     fun getItemsForName(name: String): List<Item> = cache.filter {
@@ -69,5 +67,10 @@ object ItemIndex : ResourceManagerReloadListener {
     override fun onResourceManagerReload(resourceManager: ResourceManager) {
         Searck.LOGGER.info("Reloaded: Indexing items...")
         index()
+    }
+
+    fun register() {
+        ResourceLoader.get(PackType.CLIENT_RESOURCES)
+            .registerReloadListener(Searck.id("item_indexer"), ItemIndex)
     }
 }
