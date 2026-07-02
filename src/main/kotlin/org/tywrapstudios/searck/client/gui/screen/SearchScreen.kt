@@ -29,12 +29,14 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
         input = EditBox(this.font, this.width / 2 - 150, this.height / 2 - 70, 300, 20, Component.empty())
         input.setMaxLength(2000)
         addRenderableWidget(input)
+
+        setInitialFocus(input)
     }
 
     override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
         super.extractRenderState(graphics, mouseX, mouseY, a)
 
-        graphics.text(this.font, Component.translatable("gui.searck.search_screen.title"), this.width / 2 - 150, this.height / 2 - 80, ARGB.white(255))
+        graphics.text(this.font, Component.translatable("gui.searck.search_screen.title"), this.width / 2 - 150, this.height / 2 - 80, ARGB.white(1f))
 
         val value = input.value
         if (value.isEmpty()) return
