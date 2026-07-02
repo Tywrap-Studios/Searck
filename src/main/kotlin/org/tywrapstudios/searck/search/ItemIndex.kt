@@ -6,13 +6,11 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.server.packs.PackType
 import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener
-import net.minecraft.world.item.Item
+import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.Searck
 
 object ItemIndex : ResourceManagerReloadListener {
-    private var initialized = false
-
-    val cache = mutableMapOf<String, Pair<String, Item>>()
+    val cache = mutableMapOf<String, Pair<String, ItemLike>>()
 
     internal fun index() {
         cache.clear()
@@ -28,11 +26,11 @@ object ItemIndex : ResourceManagerReloadListener {
                 val isItem = groups[1] == "item"
                 val namespace = groups[2]
                 val path = groups[3]
-                val item = if (isItem) {
-                    BuiltInRegistries.ITEM.getValue(Searck.id(namespace, path))
+                val id = Searck.id(namespace, path)
+                val item: ItemLike = if (isItem) {
+                    BuiltInRegistries.ITEM.getValue(id)
                 } else {
-                    BuiltInRegistries.BLOCK.getValue(Searck.id(namespace, path)).asItem()
-//                    BuiltInRegistries.ITEM.getValue(Searck.id(namespace, path)) as BlockItem
+                    BuiltInRegistries.BLOCK.getValue(id)
                 }
                 Searck.LOGGER.debug("Caching:")
                 Searck.LOGGER.debug("   isItem: $isItem")
@@ -47,18 +45,7 @@ object ItemIndex : ResourceManagerReloadListener {
         }
     }
 
-    fun indexIfNotInitialized() {
-//        Searck.LOGGER.info("Requested index, initialisation needed: ${!initialized}")
-//        if (!initialized) {
-//            Searck.LOGGER.info("Initializing indexing")
-//            (client.resourceManager as ReloadableResourceManager)
-//                .registerReloadListener(ItemIndex)
-//            index()
-//            initialized = true
-//        }
-    }
-
-    fun getItemsForName(name: String): List<Item> = cache.filter {
+    fun getItemsForName(name: String): List<ItemLike> = cache.filter {
         it.value.first == name
     }.values.map { it.second }
 

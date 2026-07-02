@@ -13,6 +13,7 @@ class SearckLangProvider(dataOutput: FabricPackOutput, registryLookup: Completab
         builder: TranslationBuilder
     ) {
         builder.add("gui.searck.search_screen.title", "Quick Search")
+        builder.add("gui.searck.search_screen.calc_entry.narration", "Answer is %s")
     }
 }
 
@@ -24,5 +25,6 @@ class SearckNlNlLangProvider(dataOutput: FabricPackOutput, registryLookup: Compl
         builder: TranslationBuilder
     ) {
         builder.add("gui.searck.search_screen.title", "Snel Opzoeken")
+        builder.add("gui.searck.search_screen.calc_entry.narration", "Uitkomst is %s")
     }
 }
