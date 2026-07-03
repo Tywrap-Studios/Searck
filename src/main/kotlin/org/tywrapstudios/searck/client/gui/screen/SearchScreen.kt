@@ -199,6 +199,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 hovered: Boolean,
                 a: Float
             ) {
+                if (minecraft.player!!.inventory.findSlotMatchingItem(this.getStack()) != -1) {
+                    val color = if (this@ItemList.selected == this) ARGB.color(255, 232, 166)
+                    else ARGB.color(255, 186, 0)
+                    extractSelection(graphics, this, color)
+                }
                 val stack = this.getStack()
                 this.blitSlot(graphics, contentX, contentY, stack)
                 val y = this.contentYMiddle - 9 / 2
