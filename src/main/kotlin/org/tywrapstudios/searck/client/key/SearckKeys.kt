@@ -21,9 +21,9 @@ object SearckKeys {
         )
     )
 
-    val PUSH_SOLUTION = KeyMappingHelper.registerKeyMapping(
+    val PUSH_RESULT = KeyMappingHelper.registerKeyMapping(
         KeyMapping(
-            "key.searck.push_solution",
+            "key.searck.push_result",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_ENTER,
             CATEGORY,

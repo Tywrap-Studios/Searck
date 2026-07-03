@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.components.ObjectSelectionList
 import net.minecraft.client.gui.screens.Screen
+import net.minecraft.client.gui.screens.inventory.InventoryScreen
 import net.minecraft.client.input.KeyEvent
 import net.minecraft.client.input.MouseButtonEvent
 import net.minecraft.client.renderer.RenderPipelines
@@ -14,6 +15,7 @@ import net.minecraft.network.chat.CommonComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.Identifier
 import net.minecraft.util.ARGB
+import net.minecraft.world.inventory.ContainerInput
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.Searck
@@ -63,8 +65,36 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
     }
 
     override fun keyPressed(event: KeyEvent): Boolean {
-        if (SearckKeys.PUSH_SOLUTION.matches(event) && !lastSolution.isNaN()) {
-            input.value = lastSolution.toString()
+        if (SearckKeys.PUSH_RESULT.matches(event)) {
+            val selected =  itemList.selected
+            if (selected is ItemList.CalculationEntry) {
+                input.value = selected.solution
+            } else if (selected is ItemList.ItemLikeEntry) {
+                val player = minecraft.player!!
+                val inv = player.inventory
+                val searchItem = selected.itemLike.asItem().defaultInstance
+                val matchingIndex = inv.findSlotMatchingItem(searchItem)
+                if (matchingIndex == -1) return super.keyPressed(event)
+                if (matchingIndex in 0..8) {
+                    inv.selectedSlot = matchingIndex
+                } else {
+                    val slot = player.inventoryMenu.getSlot(matchingIndex)
+
+                    val screen = InventoryScreen(player)
+
+                    Searck.LOGGER.debug(
+                        "Swapping {} ({}) to {} for {} ({}, {})",
+                        slot,
+                        slot.index,
+                        inv.selectedSlot,
+                        player,
+                        inv.toList(),
+                        player.inventoryMenu.slots.map { "$it (${it.index}, ${it.item})" }
+                    )
+                    screen.slotClicked(slot, slot.index, inv.selectedSlot, ContainerInput.SWAP)
+                }
+                minecraft.gui.setScreen(null)
+            }
         }
         return super.keyPressed(event)
     }
@@ -125,9 +155,9 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
 
         override fun scrollBarX() = this.rowRight
 
-        private abstract inner class Entry : ObjectSelectionList.Entry<Entry>()
+        abstract inner class Entry : ObjectSelectionList.Entry<Entry>()
 
-        private inner class CalculationEntry(val solution: String) : Entry() {
+        inner class CalculationEntry(val solution: String) : Entry() {
             override fun getNarration() =
                 Component.translatable("gui.searck.search_screen.calc_entry.narration", solution)
 
@@ -148,12 +178,12 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
             }
         }
 
-        private inner class ItemLikeEntry(val itemLike: ItemLike) : Entry() {
+        inner class ItemLikeEntry(val itemLike: ItemLike) : Entry() {
             override fun getNarration(): Component {
                 val stack = this.getStack()
                 return if (!stack.isEmpty) Component.translatable(
                     "narrator.select",
-                    stack.getHoverName()
+                    stack.hoverName
                 ) else CommonComponents.EMPTY
             }
 
@@ -174,7 +204,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 val y = this.contentYMiddle - 9 / 2
                 graphics.text(
                     this@SearchScreen.font,
-                    stack.getHoverName(),
+                    stack.hoverName,
                     this.contentX + 18 + 5,
                     y,
                     ARGB.white(1f)
