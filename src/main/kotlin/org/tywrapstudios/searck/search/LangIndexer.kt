@@ -5,14 +5,13 @@ import net.minecraft.client.resources.language.ClientLanguage
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.server.packs.PackType
 import net.minecraft.server.packs.resources.ResourceManager
-import net.minecraft.server.packs.resources.ResourceManagerReloadListener
 import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.Searck
 
-object ItemIndex : ResourceManagerReloadListener {
+object LangIndexer : ItemIndexer {
     val cache = mutableMapOf<String, Pair<String, ItemLike>>()
 
-    internal fun index() {
+    override fun index() {
         cache.clear()
 
         val lang = ClientLanguage.getInstance()
@@ -36,20 +35,19 @@ object ItemIndex : ResourceManagerReloadListener {
                 Searck.LOGGER.debug("   isItem: $isItem")
                 Searck.LOGGER.debug("   ID: $namespace:$path")
                 Searck.LOGGER.debug("   given: $translation")
-//                Searck.LOGGER.debug("   shown: ${item.defaultInstance.styledHoverName.string}")
                 Searck.LOGGER.debug("Cached item {}", item)
                 cache[key] = translation to item
             }
         } else {
-            Searck.LOGGER.warn("Could not fetch ClientLanguage. Please run /searck index manually")
+            Searck.LOGGER.warn("Could not fetch ClientLanguage.")
         }
     }
 
-    fun getItemsForName(name: String): List<ItemLike> = cache.filter {
+    override fun getItemsForName(name: String): List<ItemLike> = cache.filter {
         it.value.first == name
     }.values.map { it.second }
 
-    fun getNames() = cache.values.map { it.first }
+    override fun getNames() = cache.values.map { it.first }
 
     override fun onResourceManagerReload(resourceManager: ResourceManager) {
         Searck.LOGGER.info("Reloaded: Indexing items...")
@@ -58,6 +56,6 @@ object ItemIndex : ResourceManagerReloadListener {
 
     fun register() {
         ResourceLoader.get(PackType.CLIENT_RESOURCES)
-            .registerReloadListener(Searck.id("item_indexer"), ItemIndex)
+            .registerReloadListener(Searck.id("lang_indexer"), LangIndexer)
     }
 }

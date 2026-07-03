@@ -8,16 +8,19 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.tywrapstudios.searck.client.gui.screen.SearchScreen
 import org.tywrapstudios.searck.client.key.SearckKeys
-import org.tywrapstudios.searck.search.ItemIndex
+import org.tywrapstudios.searck.search.ItemIndexer
+import org.tywrapstudios.searck.search.RegistryIndexer
 
 object Searck : ClientModInitializer {
     const val MOD_ID = /*$ mod_id*/ "searck"
     val LOGGER: Logger = LoggerFactory.getLogger("Searck")
     val client get() = Minecraft.getInstance()
+    lateinit var activeIndex: ItemIndexer
 
     override fun onInitializeClient() {
         SearckKeys.register()
-        ItemIndex.register()
+        RegistryIndexer.register()
+        activeIndex = RegistryIndexer
 
         events()
     }
