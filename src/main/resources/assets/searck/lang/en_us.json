@@ -1,0 +1,16 @@
+{
+  "gui.searck.search_screen.title": "Quick Search",
+  "key.category.searck.searck_category": "Searck",
+  "key.searck.open_search": "Open Quick Search",
+  "key.searck.quick_action": "Perform Quick Action",
+  "searck.midnightconfig.title": "Searck Config",
+  "searck.midnightconfig.indexer": "Indexer",
+  "searck.midnightconfig.indexer.tooltip": "The processor to use for indexing, changing this changes how the items and blocks in the search menu are found and named.\n\nRegistry: Uses Minecraft's registries to get all objectively registered items and blocks.\n\nLanguage File: Uses your selected Language storage to programmatically determine items and blocks based on their translation key. May display blocks and items not available in the registry due to this, which may be nice.\n\nCustom: Use a custom indexer.",
+  "option.indexer.registry": "Registry",
+  "option.indexer.lang_file": "Language File",
+  "option.indexer.custom": "Custom",
+  "searck.midnightconfig.customIndexer": "Custom Indexer Class",
+  "searck.midnightconfig.customIndexer.tooltip": "Package and name of the class to use as a custom indexer. For example: com.example.search.ExampleIndexer",
+  "searck.midnightconfig.cutoff": "Fuzzy Cutoff",
+  "searck.midnightconfig.cutoff.tooltip": "The minimum score a search result needs to have when it comes to matching your original search to show in the results. (0 is basically anything, 100 is perfect match)\n\nThe lower, the less accurate your results, however it may aid more with misspellings. The higher, the more accurate, but also more prone to errors with misspellings."
+}

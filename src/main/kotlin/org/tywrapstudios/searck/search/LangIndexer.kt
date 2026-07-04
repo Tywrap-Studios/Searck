@@ -48,14 +48,4 @@ object LangIndexer : ItemIndexer {
     }.values.map { it.second }
 
     override fun getNames() = cache.values.map { it.first }
-
-    override fun onResourceManagerReload(resourceManager: ResourceManager) {
-        Searck.LOGGER.info("Reloaded: Indexing items...")
-        index()
-    }
-
-    fun register() {
-        ResourceLoader.get(PackType.CLIENT_RESOURCES)
-            .registerReloadListener(Searck.id("lang_indexer"), LangIndexer)
-    }
 }

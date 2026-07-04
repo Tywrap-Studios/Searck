@@ -31,6 +31,9 @@ repositories {
     }
     strictMaven("https://www.cursemaven.com", "CurseForge", "curse.maven")
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
+
+    maven("https://maven.midnightdust.eu/releases")
+    maven("https://maven.terraformersmc.com/")
 }
 
 dependencies {
@@ -42,6 +45,16 @@ dependencies {
         for (it in modules) modImplementation(fabricApi.module(it, sc.properties["deps.fabric_api"]))
     }
 
+    fun includeImplementation(notation: Any) {
+        implementation(notation)
+        include(notation)
+    }
+
+    fun includeModImplementation(notation: Any) {
+        modImplementation(notation)
+        include(notation)
+    }
+
     minecraft("com.mojang:minecraft:${sc.current.version}")
     // Applies Mojang Mappings on obfuscated versions
     loomx.applyMojangMappings()
@@ -51,18 +64,28 @@ dependencies {
     modImplementation("net.fabricmc:fabric-language-kotlin:${property("deps.flk")}")
 
     // FuzzyKot
-    implementation("com.github.terrakok:fuzzykot:${property("deps.fuzzykot")}")
+    includeImplementation("com.github.terrakok:fuzzykot:${property("deps.fuzzykot")}")
+    // MidnightLib
+    if (sc.current.parsed >= "1.21.11") {
+        includeModImplementation("eu.midnightdust:midnightlib:${property("deps.midnightlib")}")
+    } else {
+        modImplementation("eu.midnightdust:midnightlib:${property("deps.midnightlib")}")
+    }
 
+    // Fabric API
     if (sc.current.parsed < "26.1") {
         fapi("fabric-key-binding-api-v1")
     } else {
         fapi("fabric-key-mapping-api-v1",
-            "fabric-resource-loader-v1"
+            "fabric-resource-loader-v1",
+            "fabric-permission-api-v1",
         )
     }
     fapi(
         "fabric-lifecycle-events-v1",
-        "fabric-data-generation-api-v1",
+        "fabric-data-attachment-api-v1",
+        "fabric-item-api-v1",
+        "fabric-block-api-v1",
     )
 }
 

@@ -20,7 +20,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.Searck
 import org.tywrapstudios.searck.client.key.SearckKeys
+import org.tywrapstudios.searck.config.SearckConfig
 import org.tywrapstudios.searck.math.StringCalculator
+import org.tywrapstudios.searck.search.ItemIndex
 
 @Environment(EnvType.CLIENT)
 class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.title")) {
@@ -64,7 +66,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
     }
 
     override fun keyPressed(event: KeyEvent): Boolean {
-        if (SearckKeys.PUSH_RESULT.matches(event)) {
+        if (SearckKeys.QUICK_ACTION.matches(event)) {
             val selected =  itemList.selected
             if (selected is ItemList.CalculationEntry) {
                 input.value = selected.solution
@@ -120,7 +122,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
 
             Searck.LOGGER.debug("Searching for: $value")
             val scoreGroups = mutableMapOf<Int, MutableList<String>>()
-            Searck.activeIndex.getNames().extractTop(value, cutoff = 90).forEach {
+            ItemIndex.getActive().getNames().extractTop(value, cutoff = SearckConfig.cutoff).forEach {
                 Searck.LOGGER.debug("Extracted: {}", it)
                 if (scoreGroups[it.score] == null) {
                     scoreGroups[it.score] = mutableListOf()
@@ -132,7 +134,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 group.sort()
                 Searck.LOGGER.debug("After sort: {}", group)
                 group.forEach {
-                    Searck.activeIndex.getItemsForName(it).forEach { item ->
+                    ItemIndex.getActive().getItemsForName(it).forEach { item ->
                         this.addEntry(ItemLikeEntry(item))
                     }
                 }

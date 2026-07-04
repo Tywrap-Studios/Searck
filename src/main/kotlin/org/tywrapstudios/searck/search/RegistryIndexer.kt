@@ -57,14 +57,4 @@ object RegistryIndexer : ItemIndexer {
     override fun getItemsForName(name: String): List<ItemLike> = cache.filter {
         it.value.first == name
     }.values.map { it.second }
-
-    override fun onResourceManagerReload(resourceManager: ResourceManager) {
-        Searck.LOGGER.info("Reloaded: Indexing items...")
-        index()
-    }
-
-    fun register() {
-        ResourceLoader.get(PackType.CLIENT_RESOURCES)
-            .registerReloadListener(Searck.id("registry_indexer"), RegistryIndexer)
-    }
 }

@@ -1,5 +1,6 @@
 package org.tywrapstudios.searck
 
+import eu.midnightdust.lib.config.MidnightConfig
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.minecraft.client.Minecraft
@@ -8,19 +9,19 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.tywrapstudios.searck.client.gui.screen.SearchScreen
 import org.tywrapstudios.searck.client.key.SearckKeys
-import org.tywrapstudios.searck.search.ItemIndexer
-import org.tywrapstudios.searck.search.RegistryIndexer
+import org.tywrapstudios.searck.config.SearckConfig
+import org.tywrapstudios.searck.search.ItemIndex
 
 object Searck : ClientModInitializer {
     const val MOD_ID = /*$ mod_id*/ "searck"
     val LOGGER: Logger = LoggerFactory.getLogger("Searck")
     val client get() = Minecraft.getInstance()
-    lateinit var activeIndex: ItemIndexer
 
     override fun onInitializeClient() {
         SearckKeys.register()
-        RegistryIndexer.register()
-        activeIndex = RegistryIndexer
+        ItemIndex.init()
+
+        MidnightConfig.init(MOD_ID, SearckConfig::class.java)
 
         events()
     }

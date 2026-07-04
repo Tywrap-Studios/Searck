@@ -21,9 +21,9 @@ object SearckKeys {
         )
     )
 
-    val PUSH_RESULT = KeyMappingHelper.registerKeyMapping(
+    val QUICK_ACTION = KeyMappingHelper.registerKeyMapping(
         KeyMapping(
-            "key.searck.push_result",
+            "key.searck.quick_action",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_ENTER,
             CATEGORY,

@@ -1,0 +1,16 @@
+{
+  "gui.searck.search_screen.title": "Snel Opzoeken",
+  "key.category.searck.searck_category": "Searck",
+  "key.searck.open_search": "Open Snel Opzoeken",
+  "key.searck.quick_action": "Doe Snelle Actie",
+  "searck.midnightconfig.title": "Searckconfig",
+  "searck.midnightconfig.indexer": "Indexer",
+  "searck.midnightconfig.indexer.tooltip": "De processor die gebruikt wordt voor het indexen. Door dit te veranderen verander je de manier waarop de items en blokken in het zoekmenu worden gevonden en benoemd.\n\nRegister: Gebruikt Minecrafts register om alle objectievelijk geregistreerde items en blokken te krijgen.\n\nTaalbestand: Gebruikt je geselecteerde Taalopslag om programmatisch items en blokken te beslissen op basis van hun vertalingssleutel. Kan hierdoor blokken en items weergeven die niet in het register staan, wat misschien fijn is.\n\nAangepast: Gebruik een aangepaste indexer.",
+  "option.indexer.registry": "Register",
+  "option.indexer.lang_file": "Taalbestand",
+  "option.indexer.custom": "Aangepast",
+  "searck.midnightconfig.customIndexer": "Aangepaste Indexerclass",
+  "searck.midnightconfig.customIndexer.tooltip": "Pakket en naam van de class die gebruikt moet worden als aangepaste indexer. Bijvoorbeeld: com.example.search.ExampleIndexer",
+  "searck.midnightconfig.cutoff": "Fuzzy Afsnijding",
+  "searck.midnightconfig.cutoff.tooltip": "De minimumscore die een zoekresultaat moet hebben wanneer het gaat om hoe dicht het bij de zoekterm kwam om weer te worden gegeven tussen de resultaten. (0 betekent zo goed als alles, 100 is een perfecte overeenkomst)\n\nHoe lager, hoe minder accuraat je resultaten; geeft misschien meer hulp met foute spellingen. Hoe hoger, hoe meer accuraat maar ook hoe meer gevoelig voor foute spellingen."
+}

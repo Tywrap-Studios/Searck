@@ -22,12 +22,6 @@
         "adapter": "kotlin",
         "value": "org.tywrapstudios.searck.Searck"
       }
-    ],
-    "fabric-datagen": [
-      {
-        "adapter": "kotlin",
-        "value": "org.tywrapstudios.searck.util.datagen.SearckDataGenerator"
-      }
     ]
   },
   "mixins": [
@@ -37,6 +31,8 @@
   "depends": {
     "fabricloader": ">=0.17",
     "minecraft": "${minecraft}",
-    "fabric-language-kotlin": ">=1.13.12+kotlin.2.4.0"
+    "fabric-api": "*",
+    "fabric-language-kotlin": ">=1.13.12+kotlin.2.4.0",
+    "midnightlib": ">=1.6.4"
   }
 }
