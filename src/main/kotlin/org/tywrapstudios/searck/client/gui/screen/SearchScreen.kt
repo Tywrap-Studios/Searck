@@ -75,7 +75,10 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 val inv = player.inventory
                 val searchItem = selected.itemLike.asItem().defaultInstance
                 val matchingIndex = inv.findSlotMatchingItem(searchItem)
-                if (matchingIndex == -1) return super.keyPressed(event)
+                if (matchingIndex == -1) {
+                    minecraft.gui.setScreen(InfoScreen(selected.itemLike, this))
+                    return super.keyPressed(event)
+                }
                 if (matchingIndex in 0..8) {
                     inv.selectedSlot = matchingIndex
                 } else {
