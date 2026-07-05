@@ -89,7 +89,7 @@ dependencies {
     // Compile against the REI API but do not include it at runtime
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${property("deps.rei")}")
     // At runtime, use the full REI jar for Fabric
-    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${property("deps.rei")}")
+//    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${property("deps.rei")}")
 
     // Fabric API
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
