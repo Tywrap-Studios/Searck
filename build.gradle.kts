@@ -34,6 +34,7 @@ repositories {
 
     maven("https://maven.midnightdust.eu/releases")
     maven("https://maven.terraformersmc.com/")
+    maven("https://maven.blamejared.com/")
 }
 
 dependencies {
@@ -72,21 +73,27 @@ dependencies {
         modImplementation("eu.midnightdust:midnightlib:${property("deps.midnightlib")}")
     }
 
+    // Compile against the JEI API but do not include it at runtime
+    modCompileOnly("mezz.jei:jei-${sc.current.version}-fabric-api:${property("deps.jei")}")
+    // At runtime, use the full JEI jar for Fabric
+    modRuntimeOnly("mezz.jei:jei-${sc.current.version}-fabric:${property("deps.jei")}")
+
     // Fabric API
-    if (sc.current.parsed < "26.1") {
-        fapi("fabric-key-binding-api-v1")
-    } else {
-        fapi("fabric-key-mapping-api-v1",
-            "fabric-resource-loader-v1",
-            "fabric-permission-api-v1",
-        )
-    }
-    fapi(
-        "fabric-lifecycle-events-v1",
-        "fabric-data-attachment-api-v1",
-        "fabric-item-api-v1",
-        "fabric-block-api-v1",
-    )
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
+//    if (sc.current.parsed < "26.1") {
+//        fapi("fabric-key-binding-api-v1")
+//    } else {
+//        fapi("fabric-key-mapping-api-v1",
+//            "fabric-resource-loader-v1",
+//            "fabric-permission-api-v1",
+//        )
+//    }
+//    fapi(
+//        "fabric-lifecycle-events-v1",
+//        "fabric-data-attachment-api-v1",
+//        "fabric-item-api-v1",
+//        "fabric-block-api-v1",
+//    )
 }
 
 loom {

@@ -20,6 +20,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.Searck
 import org.tywrapstudios.searck.client.key.SearckKeys
+import org.tywrapstudios.searck.compat.IngredientRole
+import org.tywrapstudios.searck.compat.openViewer
+import org.tywrapstudios.searck.config.InfoAction
 import org.tywrapstudios.searck.config.SearckConfig
 import org.tywrapstudios.searck.math.StringCalculator
 import org.tywrapstudios.searck.search.ItemIndex
@@ -76,7 +79,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 val searchItem = selected.itemLike.asItem().defaultInstance
                 val matchingIndex = inv.findSlotMatchingItem(searchItem)
                 if (matchingIndex == -1) {
-                    minecraft.gui.setScreen(InfoScreen(selected.itemLike, this))
+                    when (SearckConfig.infoAction) {
+                        InfoAction.OPEN_IN -> openViewer(IngredientRole.INPUT, searchItem, minecraft, this)
+                        InfoAction.OPEN_OUT -> openViewer(IngredientRole.OUTPUT, searchItem, minecraft, this)
+                        else -> minecraft.gui.setScreen(InfoScreen(selected.itemLike, this))
+                    }
                     return super.keyPressed(event)
                 }
                 if (matchingIndex in 0..8) {

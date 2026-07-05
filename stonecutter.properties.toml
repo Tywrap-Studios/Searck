@@ -18,6 +18,7 @@ mod.mc_releases = ["1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4", "1.21.5", "1.
 
 deps.fabric_api = "0.116.10+1.21.1"
 deps.midnightlib = "1.9.3+1.21.1-fabric"
+deps.jei = "19.27.0.346"
 
 ["1.21.11"]
 mod.mc_compat = "1.21.11"
@@ -25,6 +26,7 @@ mod.mc_releases = ["1.21.11"]
 
 deps.fabric_api = "0.141.3+1.21.11"
 deps.midnightlib = "1.9.3+1.21.11-fabric"
+deps.jei = "27.13.0.43"
 
 ["26.1.x"]
 mod.mc_compat = "~26.1"
@@ -32,6 +34,7 @@ mod.mc_releases = ["26.1", "26.1.1", "26.1.2"]
 
 deps.fabric_api = "0.152.1+26.1.2"
 deps.midnightlib = "1.9.3+26.1-fabric"
+deps.jei = "29.12.0.40"
 
 ["26.2.x"]
 mod.mc_compat = "~26.2"
@@ -39,3 +42,4 @@ mod.mc_releases = ["26.2"]
 
 deps.fabric_api = "0.153.0+26.2"
 deps.midnightlib = "1.9.3+26.2-fabric"
+deps.jei = "30.7.0.37"

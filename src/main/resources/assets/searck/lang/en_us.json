@@ -1,9 +1,12 @@
 {
   "gui.searck.search_screen.title": "Quick Search",
+  "gui.searck.info_screen.button.open_output": "View Recipe",
+  "gui.searck.info_screen.button.open_input": "View Usage",
   "key.category.searck.searck_category": "Searck",
   "key.searck.open_search": "Open Quick Search",
   "key.searck.quick_action": "Perform Quick Action",
   "searck.midnightconfig.title": "Searck Config",
+  "searck.midnightconfig.category.search": "Search",
   "searck.midnightconfig.indexer": "Indexer",
   "searck.midnightconfig.indexer.tooltip": "The processor to use for indexing, changing this changes how the items and blocks in the search menu are found and named.\n\nRegistry: Uses Minecraft's registries to get all objectively registered items and blocks.\n\nLanguage File: Uses your selected Language storage to programmatically determine items and blocks based on their translation key. May display blocks and items not available in the registry due to this, which may be nice.\n\nCustom: Use a custom indexer.",
   "option.indexer.registry": "Registry",
@@ -12,5 +15,11 @@
   "searck.midnightconfig.customIndexer": "Custom Indexer Class",
   "searck.midnightconfig.customIndexer.tooltip": "Package and name of the class to use as a custom indexer. For example: com.example.search.ExampleIndexer",
   "searck.midnightconfig.cutoff": "Fuzzy Cutoff",
-  "searck.midnightconfig.cutoff.tooltip": "The minimum score a search result needs to have when it comes to matching your original search to show in the results. (0 is basically anything, 100 is perfect match)\n\nThe lower, the less accurate your results, however it may aid more with misspellings. The higher, the more accurate, but also more prone to errors with misspellings."
+  "searck.midnightconfig.cutoff.tooltip": "The minimum score a search result needs to have when it comes to matching your original search to show in the results. (0 is basically anything, 100 is perfect match)\n\nThe lower, the less accurate your results, however it may aid more with misspellings. The higher, the more accurate, but also more prone to errors with misspellings.",
+  "searck.midnightconfig.category.info": "Info Screen",
+  "searck.midnightconfig.infoAction": "Info Action",
+  "searck.midnightconfig.infoAction.tooltip": "What to do when accessing info about the item.\n\nOpen Info Screen: Open the info screen that is built-in.\n\nOpen Output Viewer: View the item in your recipe viewer as output.\n\nOpen Input Viewer: View the item in your recipe viewer as input.",
+  "option.infoAction.open_screen": "Open Info Screen",
+  "option.infoAction.open_output": "Open Output Viewer",
+  "option.infoAction.open_input": "Open Input Viewer"
 }

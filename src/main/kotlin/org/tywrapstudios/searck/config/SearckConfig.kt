@@ -17,8 +17,10 @@ class SearckConfig : MidnightConfig() {
         @Entry(category = SEARCH, min = 0.0, max = 100.0, isSlider = true) @JvmField
         var cutoff: Int = 90
 
-        const val KEYS = "keys"
+        const val INFO = "info"
 
+        @Entry(category = INFO) @JvmField
+        var infoAction: InfoAction = InfoAction.OPEN_SCREEN
     }
 }
 
@@ -26,6 +28,14 @@ enum class IndexerOption(val key: String) : StringRepresentable {
     REGISTRY("option.indexer.registry"),
     LANG_FILE("option.indexer.lang_file"),
     CUSTOM("option.indexer.custom");
+
+    override fun getSerializedName() = key
+}
+
+enum class InfoAction(val key: String) : StringRepresentable {
+    OPEN_SCREEN("option.infoAction.open_screen"),
+    OPEN_OUT("option.infoAction.open_output"),
+    OPEN_IN("option.infoAction.open_input");
 
     override fun getSerializedName() = key
 }

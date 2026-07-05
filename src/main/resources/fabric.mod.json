@@ -22,6 +22,12 @@
         "adapter": "kotlin",
         "value": "org.tywrapstudios.searck.Searck"
       }
+    ],
+    "jei_mod_plugin": [
+      {
+        "adapter": "kotlin",
+        "value": "org.tywrapstudios.searck.compat.jei.SearckJei"
+      }
     ]
   },
   "mixins": [
