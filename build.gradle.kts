@@ -36,6 +36,7 @@ repositories {
     maven("https://maven.terraformersmc.com/")
 
     maven("https://maven.blamejared.com/")
+    maven("https://maven.shedaniel.me")
 }
 
 dependencies {
@@ -79,10 +80,16 @@ dependencies {
     // At runtime, use the full JEI jar for Fabric
     modRuntimeOnly("mezz.jei:jei-${sc.current.version}-fabric:${property("deps.jei")}")
 
+    // EMI (only exists on 1.21(.1) right now
     if (sc.current.parsed <= "1.21.1") {
         modCompileOnly("dev.emi:emi-fabric:${property("deps.emi")}:api")
         modLocalRuntime("dev.emi:emi-fabric:${property("deps.emi")}")
     }
+
+    // Compile against the REI API but do not include it at runtime
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${property("deps.rei")}")
+    // At runtime, use the full REI jar for Fabric
+    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${property("deps.rei")}")
 
     // Fabric API
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")

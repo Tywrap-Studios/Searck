@@ -28,6 +28,18 @@
         "adapter": "kotlin",
         "value": "org.tywrapstudios.searck.compat.jei.SearckJei"
       }
+    ],
+    "emi": [
+      {
+        "adapter": "kotlin",
+        "value": "org.tywrapstudios.searck.compat.emi.SearckEmi"
+      }
+    ],
+    "rei_client": [
+      {
+        "adapter": "kotlin",
+        "value": "org.tywrapstudios.searck.compat.rei.SearckRei"
+      }
     ]
   },
   "mixins": [

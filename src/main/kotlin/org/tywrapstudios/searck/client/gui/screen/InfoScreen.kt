@@ -14,8 +14,11 @@ import net.minecraft.util.ARGB
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.compat.ActiveViewer
+import org.tywrapstudios.searck.compat.IngredientRole
+import org.tywrapstudios.searck.compat.containsEntries
 import org.tywrapstudios.searck.compat.getActiveViewer
 import org.tywrapstudios.searck.compat.jei.SearckJei
+import org.tywrapstudios.searck.compat.openViewer
 
 @Environment(EnvType.CLIENT)
 class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.translatable("gui.searck.info_screen.title")) {
@@ -29,26 +32,17 @@ class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.
         openOutputViewer = Button.builder(
             Component.translatable("gui.searck.info_screen.button.open_output")
         ) { _ ->
-            val focus = SearckJei.runtime.jeiHelpers.focusFactory.createFocus(
-                    RecipeIngredientRole.OUTPUT, VanillaTypes.ITEM_STACK, getStack()
-                )
-            SearckJei.runtime
-                .recipesGui
-                .show(focus)
+            openViewer(IngredientRole.OUTPUT, getStack(), minecraft, this)
         }.bounds(widgetX - 140 / 2 - 10, height - 60, 140, 20).build()
-        openOutputViewer.active = getActiveViewer() != ActiveViewer.NONE
+        openOutputViewer.active = containsEntries(IngredientRole.OUTPUT, getStack())
         addRenderableWidget(openOutputViewer)
+
         openInputViewer = Button.builder(
             Component.translatable("gui.searck.info_screen.button.open_input")
         ) { _ ->
-            val focus = SearckJei.runtime.jeiHelpers.focusFactory.createFocus(
-                RecipeIngredientRole.INPUT, VanillaTypes.ITEM_STACK, getStack()
-            )
-            SearckJei.runtime
-                .recipesGui
-                .show(focus)
+            openViewer(IngredientRole.INPUT, getStack(), minecraft, this)
         }.bounds(widgetX + 140 / 2 + 10, height - 60, 140, 20).build()
-        openInputViewer.active = getActiveViewer() != ActiveViewer.NONE
+        openInputViewer.active = containsEntries(IngredientRole.INPUT, getStack())
         addRenderableWidget(openInputViewer)
     }
 
