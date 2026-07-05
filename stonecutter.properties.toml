@@ -19,6 +19,7 @@ mod.mc_releases = ["1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4", "1.21.5", "1.
 deps.fabric_api = "0.116.10+1.21.1"
 deps.midnightlib = "1.9.3+1.21.1-fabric"
 deps.jei = "19.27.0.346"
+deps.emi = "1.1.24+1.21.1"
 
 ["1.21.11"]
 mod.mc_compat = "1.21.11"

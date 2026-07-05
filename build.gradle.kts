@@ -34,6 +34,7 @@ repositories {
 
     maven("https://maven.midnightdust.eu/releases")
     maven("https://maven.terraformersmc.com/")
+
     maven("https://maven.blamejared.com/")
 }
 
@@ -77,6 +78,11 @@ dependencies {
     modCompileOnly("mezz.jei:jei-${sc.current.version}-fabric-api:${property("deps.jei")}")
     // At runtime, use the full JEI jar for Fabric
     modRuntimeOnly("mezz.jei:jei-${sc.current.version}-fabric:${property("deps.jei")}")
+
+    if (sc.current.parsed <= "1.21.1") {
+        modCompileOnly("dev.emi:emi-fabric:${property("deps.emi")}:api")
+        modLocalRuntime("dev.emi:emi-fabric:${property("deps.emi")}")
+    }
 
     // Fabric API
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
