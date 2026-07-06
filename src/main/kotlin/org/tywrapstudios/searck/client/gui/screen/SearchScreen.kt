@@ -82,7 +82,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
         super.extractBackground(graphics, mouseX, mouseY, a)
     //?} else {
     /*override fun renderBackground(graphics: GuiGraphicsExtractor, i: Int, j: Int, a: Float) {
-        super.render(graphics, i, j, a)
+        super.renderBackground(graphics, i, j, a)
     *///?}
         //? <1.21.11
         //val minecraft = this.minecraft!!
@@ -233,8 +233,8 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
             //? >=26.1 {
             override fun extractContent(
             //?} else if >=1.21.11 {
-//            override fun renderContent(
-            //?} else {
+            /*override fun renderContent(
+            *///?} else {
             /*override fun render(
             *///?}
                 graphics: GuiGraphicsExtractor,
@@ -285,8 +285,8 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
             //? >=26.1 {
             override fun extractContent(
             //?} else if >=1.21.11 {
-//            override fun renderContent(
-            //?} else {
+            /*override fun renderContent(
+            *///?} else {
             /*override fun render(
                 *///?}
                 graphics: GuiGraphicsExtractor,
@@ -308,8 +308,8 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                     //? >=26.1 {
                     extractSelection(graphics, this, color)
                     //?} else if >=1.21.11 {
-//                    renderSelection(graphics, this, color)
-                    //?} else {
+                    /*renderSelection(graphics, this, color)
+                    *///?} else {
                     /*val p = if (this.isFocused) -1 else -8355712
                     renderSelection(graphics, contentHeight, contentXMiddle, contentYMiddle, p, color)
                     *///?}

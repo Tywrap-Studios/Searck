@@ -1,20 +1,23 @@
 package org.tywrapstudios.searck.platform
 
-//? >=1.21.11 {
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader
-import net.minecraft.resources.Identifier
-import net.minecraft.server.packs.resources.PreparableReloadListener
-//?} else {
-/*import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper
-import net.minecraft.world.entity.player.Inventory
-import net.minecraft.core.DefaultedRegistry
-import net.minecraft.network.chat.Component
-import net.minecraft.server.packs.resources.PreparableReloadListener
-import net.minecraft.world.inventory.ClickType
+//? <26.1 {
+/*import net.minecraft.world.inventory.ClickType
 import net.minecraft.world.item.ItemStack
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.network.chat.Component
+*///?}
+
+//? >=1.21.11 {
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader
+import net.minecraft.server.packs.resources.PreparableReloadListener
+//?} else {
+/*import net.minecraft.resources.Identifier
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper
+import net.minecraft.world.entity.player.Inventory
+import net.minecraft.core.DefaultedRegistry
+import net.minecraft.server.packs.resources.PreparableReloadListener
 *///?}
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
@@ -71,7 +74,7 @@ object ARGB {
     }
 
     fun color(r: Int, g: Int, b: Int): Int {
-        (255 & 255) << 24 | (r & 255) << 16 | (g & 255) << 8 | b & 255
+        return (255 and 255) shl 24 or (r and 255) shl 16 or (g and 255) shl 8 or b and 255
     }
 }
 
@@ -84,7 +87,7 @@ var Inventory.selectedSlot: Int
 typealias ResourceLoader = ResourceManagerHelper
 
 fun ResourceLoader.registerReloadListener(id: Identifier, reloader: IdentifiableResourceReloadListener) {
-    this.registerReloadListener(id) { reloader }
+    this.registerReloadListener(reloader)
 }
 
 fun <T> DefaultedRegistry<T>.getValue(id: Identifier): T {

@@ -1,26 +1,28 @@
 package org.tywrapstudios.searck.search
 
-import net.minecraft.resources.Identifier
-import net.minecraft.server.packs.PackType
-import net.minecraft.server.packs.resources.PreparableReloadListener
-import net.minecraft.server.packs.resources.ResourceManager
-import net.minecraft.util.profiling.ProfilerFiller
 import org.tywrapstudios.searck.Searck
 import org.tywrapstudios.searck.config.IndexerOption
 import org.tywrapstudios.searck.config.SearckConfig
-import net.minecraft.server.packs.resources.ResourceManagerReloadListener
-//? <26.1 {
-/*import org.tywrapstudios.searck.platform.ResourceLoader
-import org.tywrapstudios.searck.platform.registerReloadListener
-*///?}
+import net.minecraft.server.packs.PackType
 
 //? >= 1.21.11 {
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader
+import net.minecraft.server.packs.resources.ResourceManager
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener
+
 //?} else {
-//import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
-//import java.util.concurrent.CompletableFuture
-//import java.util.concurrent.Executor
-//?}
+/*import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
+import net.minecraft.resources.Identifier
+import net.minecraft.server.packs.resources.PreparableReloadListener
+import net.minecraft.server.packs.resources.ResourceManager
+import net.minecraft.util.Unit
+import net.minecraft.util.profiling.ProfilerFiller
+import org.tywrapstudios.searck.platform.ResourceLoader
+import org.tywrapstudios.searck.platform.registerReloadListener
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.Executor
+
+*///?}
 
 //? >=1.21.11 {
 object ItemIndex : ResourceManagerReloadListener {
@@ -39,12 +41,20 @@ object ItemIndex : ResourceManagerReloadListener {
         profilerFiller2: ProfilerFiller,
         executor: Executor,
         executor2: Executor
-    ): CompletableFuture<Void>? {
+    ): CompletableFuture<Void> {
     *///?}
-        Searck.LOGGER.info("Reloaded: Indexing items...")
-        getActive().index()
-        //? <1.21.11
-//        return null
+        //? <1.21.11 {
+        /*return preparationBarrier.wait<Unit>(Unit.INSTANCE).thenRunAsync( {
+            profilerFiller2.startTick()
+            profilerFiller2.push("listener")
+            *///?}
+            Searck.LOGGER.info("Reloaded: Indexing items...")
+            getActive().index()
+            //? <1.21.11 {
+            /*profilerFiller2.pop()
+            profilerFiller2.endTick()
+        }, executor2)
+        *///?}
     }
 
     @OptIn(ExperimentalStdlibApi::class)
