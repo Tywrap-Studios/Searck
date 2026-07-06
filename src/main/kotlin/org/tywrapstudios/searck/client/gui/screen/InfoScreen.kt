@@ -2,13 +2,10 @@ package org.tywrapstudios.searck.client.gui.screen
 
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.Screen
-import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.Identifier
-import net.minecraft.util.ARGB
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.compat.IngredientRole
@@ -16,12 +13,20 @@ import org.tywrapstudios.searck.compat.containsEntries
 import org.tywrapstudios.searck.compat.openViewer
 import org.tywrapstudios.searck.platform.vUtil
 //? if >=26.1 {
-//import net.minecraft.client.gui.GuiGraphicsExtractor
+import net.minecraft.client.gui.GuiGraphicsExtractor
 //?} else {
-import org.tywrapstudios.searck.platform.GuiGraphicsExtractor
+/*import org.tywrapstudios.searck.platform.GuiGraphicsExtractor
 import org.tywrapstudios.searck.platform.fakeItem
 import org.tywrapstudios.searck.platform.text
-//?}
+*///?}
+
+//? >=1.21.11 {
+import net.minecraft.util.ARGB
+import net.minecraft.client.renderer.RenderPipelines
+//?} else {
+/*import org.tywrapstudios.searck.platform.setTooltipForNextFrame
+import org.tywrapstudios.searck.platform.ARGB
+*///?}
 
 @Environment(EnvType.CLIENT)
 class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.translatable("gui.searck.info_screen.title")) {
@@ -32,6 +37,8 @@ class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.
     val widgetY get() = height / 2 - 70
 
     override fun init() {
+        //? <1.21.11
+        //val minecraft = this.minecraft!!
         openOutputViewer = Button.builder(
             Component.translatable("gui.searck.info_screen.button.open_output")
         ) { _ ->
@@ -50,12 +57,12 @@ class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.
     }
 
     //? >=26.1 {
-//    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
-//        super.extractRenderState(graphics, mouseX, mouseY, a)
+    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
+        super.extractRenderState(graphics, mouseX, mouseY, a)
     //?} else {
-    override fun render(graphics: GuiGraphics, i: Int, j: Int, f: Float) {
+    /*override fun render(graphics: GuiGraphicsExtractor, i: Int, j: Int, f: Float) {
         super.render(graphics, i, j, f)
-    //?}
+    *///?}
 
         val stack = this.getStack()
 
@@ -92,6 +99,10 @@ class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.
 
     private fun blitSlotBg(graphics: GuiGraphicsExtractor, x: Int, y: Int) {
         val sprite = Identifier.withDefaultNamespace("container/slot")
+        //? >=1.21.11 {
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 18, 18)
+        //?} else {
+        /*graphics.blitSprite(sprite, x, y, 0, 18, 18)
+        *///?}
     }
 }

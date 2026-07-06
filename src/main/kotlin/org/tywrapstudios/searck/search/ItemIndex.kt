@@ -1,21 +1,50 @@
 package org.tywrapstudios.searck.search
 
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader
+import net.minecraft.resources.Identifier
 import net.minecraft.server.packs.PackType
+import net.minecraft.server.packs.resources.PreparableReloadListener
 import net.minecraft.server.packs.resources.ResourceManager
-import net.minecraft.server.packs.resources.ResourceManagerReloadListener
+import net.minecraft.util.profiling.ProfilerFiller
 import org.tywrapstudios.searck.Searck
 import org.tywrapstudios.searck.config.IndexerOption
 import org.tywrapstudios.searck.config.SearckConfig
-//? <26.1
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener
+//? <26.1 {
+/*import org.tywrapstudios.searck.platform.ResourceLoader
 import org.tywrapstudios.searck.platform.registerReloadListener
+*///?}
 
+//? >= 1.21.11 {
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader
+//?} else {
+//import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
+//import java.util.concurrent.CompletableFuture
+//import java.util.concurrent.Executor
+//?}
+
+//? >=1.21.11 {
 object ItemIndex : ResourceManagerReloadListener {
+//?} else {
+/*object ItemIndex : IdentifiableResourceReloadListener {
+*///?}
     private val hasIndexed = mutableMapOf<ItemIndexer, Boolean>()
 
+    //? >=1.21.11 {
     override fun onResourceManagerReload(resourceManager: ResourceManager) {
+    //?} else {
+    /*override fun reload(
+        preparationBarrier: PreparableReloadListener.PreparationBarrier,
+        resourceManager: ResourceManager,
+        profilerFiller: ProfilerFiller,
+        profilerFiller2: ProfilerFiller,
+        executor: Executor,
+        executor2: Executor
+    ): CompletableFuture<Void>? {
+    *///?}
         Searck.LOGGER.info("Reloaded: Indexing items...")
         getActive().index()
+        //? <1.21.11
+//        return null
     }
 
     @OptIn(ExperimentalStdlibApi::class)
@@ -44,6 +73,12 @@ object ItemIndex : ResourceManagerReloadListener {
 
     fun init() {
         ResourceLoader.get(PackType.CLIENT_RESOURCES)
-            .registerReloadListener(Searck.id("lang_indexer"), this)
+            .registerReloadListener(Searck.id("item_index"), this)
     }
+
+    //? <1.21.11 {
+    /*override fun getFabricId(): Identifier {
+        return Searck.id("item_index")
+    }
+    *///?}
 }

@@ -1,11 +1,8 @@
 package org.tywrapstudios.searck.search
 
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader
 import net.minecraft.client.resources.language.ClientLanguage
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.Identifier
-import net.minecraft.server.packs.PackType
-import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.Searck
 
@@ -21,7 +18,7 @@ object RegistryIndexer : ItemIndexer {
             val key = holder.unwrapKey().get().identifier()
             val item = holder.value()
             val name = try {
-                item.defaultInstance.itemName.string
+                item.defaultInstance.hoverName.string
             } catch (_: Exception) {
                 if (lang is ClientLanguage) {
                     lang.storage[item.descriptionId] ?: item.descriptionId
@@ -38,7 +35,7 @@ object RegistryIndexer : ItemIndexer {
             val block = holder.value()
             val item = block.asItem()
             val name = try {
-                item.defaultInstance.itemName.string
+                item.defaultInstance.hoverName.string
             } catch (_: Exception) {
                 if (lang is ClientLanguage) {
                     lang.storage[block.descriptionId] ?: block.descriptionId

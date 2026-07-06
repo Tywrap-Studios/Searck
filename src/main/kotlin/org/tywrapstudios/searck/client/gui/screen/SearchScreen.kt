@@ -7,13 +7,9 @@ import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.components.ObjectSelectionList
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.InventoryScreen
-import net.minecraft.client.input.KeyEvent
-import net.minecraft.client.input.MouseButtonEvent
-import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.network.chat.CommonComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.Identifier
-import net.minecraft.util.ARGB
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.Searck
@@ -23,16 +19,20 @@ import org.tywrapstudios.searck.compat.openViewer
 import org.tywrapstudios.searck.config.InfoAction
 import org.tywrapstudios.searck.config.SearckConfig
 import org.tywrapstudios.searck.math.StringCalculator
-import org.tywrapstudios.searck.platform.vUtil
+import org.tywrapstudios.searck.platform.*
 import org.tywrapstudios.searck.search.ItemIndex
-//? if >=26.1 {
-//import net.minecraft.client.gui.GuiGraphicsExtractor
-//import net.minecraft.world.inventory.ContainerInput
+
+//? >=26.1 {
+import net.minecraft.client.gui.GuiGraphicsExtractor
+import net.minecraft.world.inventory.ContainerInput
 //?} else {
-import org.tywrapstudios.searck.platform.GuiGraphicsExtractor
-import org.tywrapstudios.searck.platform.fakeItem
-import org.tywrapstudios.searck.platform.text
-import org.tywrapstudios.searck.platform.ContainerInput
+//?}
+
+//? >=1.21.11 {
+import net.minecraft.client.input.KeyEvent
+import net.minecraft.client.input.MouseButtonEvent
+import net.minecraft.client.renderer.RenderPipelines
+import net.minecraft.util.ARGB
 //?}
 
 @Environment(EnvType.CLIENT)
@@ -61,12 +61,12 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
     }
 
     //? >=26.1 {
-//    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
-//        super.extractRenderState(graphics, mouseX, mouseY, a)
+    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
+        super.extractRenderState(graphics, mouseX, mouseY, a)
     //?} else {
-    override fun render(graphics: GuiGraphicsExtractor, i: Int, j: Int, f: Float) {
+    /*override fun render(graphics: GuiGraphicsExtractor, i: Int, j: Int, f: Float) {
         super.render(graphics, i, j, f)
-        //?}
+        *///?}
 
         graphics.text(this.font, Component.translatable("gui.searck.search_screen.title"), this.width / 2 - 150, this.height / 2 - 80, ARGB.white(1f))
 
@@ -78,23 +78,36 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
     }
 
     //? >=26.1 {
-//    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
-//        super.extractRenderState(graphics, mouseX, mouseY, a)
+    override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
+        super.extractBackground(graphics, mouseX, mouseY, a)
     //?} else {
-    override fun renderBackground(graphics: GuiGraphicsExtractor, i: Int, j: Int, a: Float) {
+    /*override fun renderBackground(graphics: GuiGraphicsExtractor, i: Int, j: Int, a: Float) {
         super.render(graphics, i, j, a)
-    //?}
-        if (this.minecraft.level == null) {
+    *///?}
+        //? <1.21.11
+        //val minecraft = this.minecraft!!
+        if (minecraft.level == null) {
             //? >=26.1 {
-//            this.extractPanorama(graphics, a)
+            this.extractPanorama(graphics, a)
             //?} else {
-            this.renderPanorama(graphics, a)
-            //?}
+            /*this.renderPanorama(graphics, a)
+            *///?}
         }
     }
 
+    //? >=1.21.11 {
     override fun keyPressed(event: KeyEvent): Boolean {
+    //?} else {
+    /*override fun keyPressed(i: Int, j: Int, k: Int): Boolean {
+    *///?}
+
+        //? <1.21.11
+        //val minecraft = this.minecraft!!
+        //? >=1.21.11 {
         if (SearckKeys.QUICK_ACTION.matches(event)) {
+        //?} else {
+        /*if (SearckKeys.QUICK_ACTION.matches(i, j)) {
+        *///?}
             val selected =  itemList.selected
             if (selected is ItemList.CalculationEntry) {
                 input.value = selected.solution
@@ -109,7 +122,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                         InfoAction.OPEN_OUT -> openViewer(IngredientRole.OUTPUT, searchItem, minecraft, this)
                         else -> minecraft.vUtil.setScreen(InfoScreen(selected.itemLike, this))
                     }
+                    //? >=1.21.11 {
                     return super.keyPressed(event)
+                    //?} else {
+                    /*return super.keyPressed(i, j, k)
+                    *///?}
                 }
                 if (matchingIndex in 0..8) {
                     inv.selectedSlot = matchingIndex
@@ -124,7 +141,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                         slot.index,
                         inv.selectedSlot,
                         player,
+                        //? >=1.21.11 {
                         inv.toList(),
+                        //?} else {
+                        /*inv.items,
+                        *///?}
                         player.inventoryMenu.slots.map { "$it (${it.index}, ${it.item})" }
                     )
                     screen.slotClicked(slot, slot.index, inv.selectedSlot, ContainerInput.SWAP)
@@ -132,7 +153,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 minecraft.vUtil.setScreen(null)
             }
         }
+        //? >=1.21.11 {
         return super.keyPressed(event)
+        //?} else {
+        /*return super.keyPressed(i, j, k)
+        *///?}
     }
 
     private inner class ItemList : ObjectSelectionList<ItemList.Entry>(
@@ -187,13 +212,17 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
 
         override fun getRowLeft() = this.x
         //? >=26.1 {
-//        override fun getRowWidth() = if (scrollable()) this@SearchScreen.widgetWidth - this.scrollbarWidth()
+        override fun getRowWidth() = if (scrollable()) this@SearchScreen.widgetWidth - this.scrollbarWidth()
         //?} else {
-        override fun getRowWidth() = if (scrollbarVisible()) this@SearchScreen.widgetWidth - 6
-        //?}
+        /*override fun getRowWidth() = if (scrollbarVisible()) this@SearchScreen.widgetWidth - 6
+        *///?}
         else this@SearchScreen.widgetWidth
 
+        //? >=1.21.11 {
         override fun scrollBarX() = this.rowRight
+        //?} else {
+        /*override fun getScrollbarPosition() = this.rowRight
+        *///?}
 
         abstract inner class Entry : ObjectSelectionList.Entry<Entry>()
 
@@ -202,13 +231,22 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 Component.translatable("gui.searck.search_screen.calc_entry.narration", solution)
 
             //? >=26.1 {
-//            override fun extractContent(
+            override fun extractContent(
+            //?} else if >=1.21.11 {
+//            override fun renderContent(
             //?} else {
-            override fun renderContent(
-            //?}
+            /*override fun render(
+            *///?}
                 graphics: GuiGraphicsExtractor,
                 mouseX: Int,
                 mouseY: Int,
+                //? <=1.21.1 {
+                /*contentX: Int,
+                contentY: Int,
+                contentHeight: Int,
+                n: Int,
+                o: Int,
+                *///?}
                 hovered: Boolean,
                 a: Float
             ) {
@@ -231,19 +269,36 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 ) else CommonComponents.EMPTY
             }
 
+            //? >=1.21.11 {
             override fun mouseClicked(event: MouseButtonEvent, doubleClick: Boolean): Boolean {
+        //?} else {
+            /*override fun mouseClicked(d: Double, e: Double, i: Int): Boolean {
+                *///?}
                 this@ItemList.selected = this
+                //? >=1.21.11 {
                 return super.mouseClicked(event, doubleClick)
+                //?} else {
+                /*return super.mouseClicked(d, e, i)
+                *///?}
             }
 
             //? >=26.1 {
-//            override fun extractContent(
+            override fun extractContent(
+            //?} else if >=1.21.11 {
+//            override fun renderContent(
             //?} else {
-            override fun renderContent(
-                //?}
+            /*override fun render(
+                *///?}
                 graphics: GuiGraphicsExtractor,
-                mouseX: Int,
-                mouseY: Int,
+                i: Int,
+                j: Int,
+                //? <=1.21.1 {
+                /*contentX: Int,
+                contentY: Int,
+                contentHeight: Int,
+                contentXMiddle: Int,
+                contentYMiddle: Int,
+                *///?}
                 hovered: Boolean,
                 a: Float
             ) {
@@ -251,18 +306,21 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                     val color = if (this@ItemList.selected == this) ARGB.color(255, 232, 166)
                     else ARGB.color(255, 186, 0)
                     //? >=26.1 {
-//                    extractSelection(graphics, this, color)
+                    extractSelection(graphics, this, color)
+                    //?} else if >=1.21.11 {
+//                    renderSelection(graphics, this, color)
                     //?} else {
-                    renderSelection(graphics, this, color)
-                    //?}
+                    /*val p = if (this.isFocused) -1 else -8355712
+                    renderSelection(graphics, contentHeight, contentXMiddle, contentYMiddle, p, color)
+                    *///?}
                 }
                 val stack = this.getStack()
                 this.blitSlot(graphics, contentX, contentY, stack)
-                val y = this.contentYMiddle - 9 / 2
+                val y = contentYMiddle - 9 / 2
                 graphics.text(
                     this@SearchScreen.font,
                     stack.hoverName,
-                    this.contentX + 18 + 5,
+                    contentX + 18 + 5,
                     y,
                     ARGB.white(1f)
                 )
@@ -279,7 +337,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
 
             private fun blitSlotBg(graphics: GuiGraphicsExtractor, x: Int, y: Int) {
                 val sprite = Identifier.withDefaultNamespace("container/slot")
+                //? >=1.21.11 {
                 graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 18, 18)
+                //?} else {
+                /*graphics.blitSprite(sprite, x, y, 0, 18, 18)
+                *///?}
             }
         }
     }

@@ -4,23 +4,27 @@ import com.mojang.blaze3d.platform.InputConstants
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 //? >=26.1 {
-//import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
 //?} else {
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
-//?}
+/*import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
+*///?}
 import net.minecraft.client.KeyMapping
 import org.lwjgl.glfw.GLFW
 import org.tywrapstudios.searck.Searck
 
 @Environment(EnvType.CLIENT)
 object SearckKeys {
+    //? >=1.21.11 {
     val CATEGORY = KeyMapping.Category.register(Searck.id("searck_category"))
+    //?} else {
+    /*val CATEGORY = "searck_category"
+    *///?}
 
     //? >=26.1 {
-//    val OPEN_SEARCH = KeyMappingHelper.registerKeyMapping(
+    val OPEN_SEARCH = KeyMappingHelper.registerKeyMapping(
     //?} else {
-    val OPEN_SEARCH = KeyBindingHelper.registerKeyBinding(
-    //?}
+    /*val OPEN_SEARCH = KeyBindingHelper.registerKeyBinding(
+    *///?}
         KeyMapping(
             "key.searck.open_search",
             InputConstants.Type.KEYSYM,
@@ -30,10 +34,10 @@ object SearckKeys {
     )
 
     //? >=26.1 {
-//    val QUICK_ACTION = KeyMappingHelper.registerKeyMapping(
+    val QUICK_ACTION = KeyMappingHelper.registerKeyMapping(
     //?} else {
-    val QUICK_ACTION = KeyBindingHelper.registerKeyBinding(
-        //?}
+    /*val QUICK_ACTION = KeyBindingHelper.registerKeyBinding(
+        *///?}
         KeyMapping(
             "key.searck.quick_action",
             InputConstants.Type.KEYSYM,

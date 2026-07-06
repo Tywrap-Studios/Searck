@@ -14,6 +14,7 @@ stonecutter parameters {
     replacements {
         string(current.parsed >= "1.21.11") {
             replace("ResourceLocation", "Identifier")
+            replace("location()", "identifier()")
         }
 
         string(current.parsed >= "26.1") {
