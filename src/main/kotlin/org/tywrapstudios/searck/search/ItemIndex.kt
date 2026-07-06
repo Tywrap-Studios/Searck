@@ -7,6 +7,8 @@ import net.minecraft.server.packs.resources.ResourceManagerReloadListener
 import org.tywrapstudios.searck.Searck
 import org.tywrapstudios.searck.config.IndexerOption
 import org.tywrapstudios.searck.config.SearckConfig
+//? <26.1
+import org.tywrapstudios.searck.platform.registerReloadListener
 
 object ItemIndex : ResourceManagerReloadListener {
     private val hasIndexed = mutableMapOf<ItemIndexer, Boolean>()

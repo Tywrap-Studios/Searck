@@ -3,7 +3,6 @@ package org.tywrapstudios.searck.compat.jei
 import mezz.jei.api.IModPlugin
 import mezz.jei.api.JeiPlugin
 import mezz.jei.api.constants.VanillaTypes
-import mezz.jei.api.recipe.IFocus
 import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.runtime.IJeiRuntime
 import net.minecraft.resources.Identifier

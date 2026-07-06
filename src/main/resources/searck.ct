@@ -1,4 +1,9 @@
-classTweaker v2 official
+classTweaker v2 named
 accessible field net/minecraft/client/resources/language/ClientLanguage storage Ljava/util/Map;
-accessible method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen slotClicked (Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ContainerInput;)V
-accessible method net/minecraft/client/gui/screens/inventory/AbstractRecipeBookScreen slotClicked (Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ContainerInput;)V
+#? >=26.1 {
+#accessible method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen slotClicked (Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ContainerInput;)V
+#accessible method net/minecraft/client/gui/screens/inventory/AbstractRecipeBookScreen slotClicked (Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ContainerInput;)V
+#?} else {
+accessible method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen slotClicked (Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ClickType;)V
+accessible method net/minecraft/client/gui/screens/inventory/AbstractRecipeBookScreen slotClicked (Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ClickType;)V
+#?}

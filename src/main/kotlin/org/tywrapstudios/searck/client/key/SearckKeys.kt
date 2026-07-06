@@ -3,7 +3,11 @@ package org.tywrapstudios.searck.client.key
 import com.mojang.blaze3d.platform.InputConstants
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
+//? >=26.1 {
+//import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
+//?} else {
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
+//?}
 import net.minecraft.client.KeyMapping
 import org.lwjgl.glfw.GLFW
 import org.tywrapstudios.searck.Searck
@@ -12,7 +16,11 @@ import org.tywrapstudios.searck.Searck
 object SearckKeys {
     val CATEGORY = KeyMapping.Category.register(Searck.id("searck_category"))
 
-    val OPEN_SEARCH = KeyMappingHelper.registerKeyMapping(
+    //? >=26.1 {
+//    val OPEN_SEARCH = KeyMappingHelper.registerKeyMapping(
+    //?} else {
+    val OPEN_SEARCH = KeyBindingHelper.registerKeyBinding(
+    //?}
         KeyMapping(
             "key.searck.open_search",
             InputConstants.Type.KEYSYM,
@@ -21,7 +29,11 @@ object SearckKeys {
         )
     )
 
-    val QUICK_ACTION = KeyMappingHelper.registerKeyMapping(
+    //? >=26.1 {
+//    val QUICK_ACTION = KeyMappingHelper.registerKeyMapping(
+    //?} else {
+    val QUICK_ACTION = KeyBindingHelper.registerKeyBinding(
+        //?}
         KeyMapping(
             "key.searck.quick_action",
             InputConstants.Type.KEYSYM,

@@ -3,7 +3,6 @@ package org.tywrapstudios.searck.client.gui.screen
 import com.github.terrakok.fuzzykot.extractTop
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.components.ObjectSelectionList
 import net.minecraft.client.gui.screens.Screen
@@ -15,7 +14,6 @@ import net.minecraft.network.chat.CommonComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.Identifier
 import net.minecraft.util.ARGB
-import net.minecraft.world.inventory.ContainerInput
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.Searck
@@ -27,6 +25,15 @@ import org.tywrapstudios.searck.config.SearckConfig
 import org.tywrapstudios.searck.math.StringCalculator
 import org.tywrapstudios.searck.platform.vUtil
 import org.tywrapstudios.searck.search.ItemIndex
+//? if >=26.1 {
+//import net.minecraft.client.gui.GuiGraphicsExtractor
+//import net.minecraft.world.inventory.ContainerInput
+//?} else {
+import org.tywrapstudios.searck.platform.GuiGraphicsExtractor
+import org.tywrapstudios.searck.platform.fakeItem
+import org.tywrapstudios.searck.platform.text
+import org.tywrapstudios.searck.platform.ContainerInput
+//?}
 
 @Environment(EnvType.CLIENT)
 class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.title")) {
@@ -53,8 +60,13 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
         setInitialFocus(input)
     }
 
-    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
-        super.extractRenderState(graphics, mouseX, mouseY, a)
+    //? >=26.1 {
+//    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
+//        super.extractRenderState(graphics, mouseX, mouseY, a)
+    //?} else {
+    override fun render(graphics: GuiGraphicsExtractor, i: Int, j: Int, f: Float) {
+        super.render(graphics, i, j, f)
+        //?}
 
         graphics.text(this.font, Component.translatable("gui.searck.search_screen.title"), this.width / 2 - 150, this.height / 2 - 80, ARGB.white(1f))
 
@@ -65,8 +77,20 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
         }
     }
 
-    override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
-        if (this.minecraft.level == null) this.extractPanorama(graphics, a)
+    //? >=26.1 {
+//    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
+//        super.extractRenderState(graphics, mouseX, mouseY, a)
+    //?} else {
+    override fun renderBackground(graphics: GuiGraphicsExtractor, i: Int, j: Int, a: Float) {
+        super.render(graphics, i, j, a)
+    //?}
+        if (this.minecraft.level == null) {
+            //? >=26.1 {
+//            this.extractPanorama(graphics, a)
+            //?} else {
+            this.renderPanorama(graphics, a)
+            //?}
+        }
     }
 
     override fun keyPressed(event: KeyEvent): Boolean {
@@ -162,7 +186,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
         }
 
         override fun getRowLeft() = this.x
-        override fun getRowWidth() = if (scrollable()) this@SearchScreen.widgetWidth - this.scrollbarWidth()
+        //? >=26.1 {
+//        override fun getRowWidth() = if (scrollable()) this@SearchScreen.widgetWidth - this.scrollbarWidth()
+        //?} else {
+        override fun getRowWidth() = if (scrollbarVisible()) this@SearchScreen.widgetWidth - 6
+        //?}
         else this@SearchScreen.widgetWidth
 
         override fun scrollBarX() = this.rowRight
@@ -173,7 +201,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
             override fun getNarration() =
                 Component.translatable("gui.searck.search_screen.calc_entry.narration", solution)
 
-            override fun extractContent(
+            //? >=26.1 {
+//            override fun extractContent(
+            //?} else {
+            override fun renderContent(
+            //?}
                 graphics: GuiGraphicsExtractor,
                 mouseX: Int,
                 mouseY: Int,
@@ -204,7 +236,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 return super.mouseClicked(event, doubleClick)
             }
 
-            override fun extractContent(
+            //? >=26.1 {
+//            override fun extractContent(
+            //?} else {
+            override fun renderContent(
+                //?}
                 graphics: GuiGraphicsExtractor,
                 mouseX: Int,
                 mouseY: Int,
@@ -214,7 +250,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 if (minecraft.player!!.inventory.findSlotMatchingItem(this.getStack()) != -1) {
                     val color = if (this@ItemList.selected == this) ARGB.color(255, 232, 166)
                     else ARGB.color(255, 186, 0)
-                    extractSelection(graphics, this, color)
+                    //? >=26.1 {
+//                    extractSelection(graphics, this, color)
+                    //?} else {
+                    renderSelection(graphics, this, color)
+                    //?}
                 }
                 val stack = this.getStack()
                 this.blitSlot(graphics, contentX, contentY, stack)

@@ -1,10 +1,8 @@
 package org.tywrapstudios.searck.client.gui.screen
 
-import mezz.jei.api.constants.VanillaTypes
-import mezz.jei.api.recipe.RecipeIngredientRole
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.minecraft.client.gui.GuiGraphicsExtractor
+import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.renderer.RenderPipelines
@@ -13,13 +11,17 @@ import net.minecraft.resources.Identifier
 import net.minecraft.util.ARGB
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
-import org.tywrapstudios.searck.compat.ActiveViewer
 import org.tywrapstudios.searck.compat.IngredientRole
 import org.tywrapstudios.searck.compat.containsEntries
-import org.tywrapstudios.searck.compat.getActiveViewer
-import org.tywrapstudios.searck.compat.jei.SearckJei
 import org.tywrapstudios.searck.compat.openViewer
 import org.tywrapstudios.searck.platform.vUtil
+//? if >=26.1 {
+//import net.minecraft.client.gui.GuiGraphicsExtractor
+//?} else {
+import org.tywrapstudios.searck.platform.GuiGraphicsExtractor
+import org.tywrapstudios.searck.platform.fakeItem
+import org.tywrapstudios.searck.platform.text
+//?}
 
 @Environment(EnvType.CLIENT)
 class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.translatable("gui.searck.info_screen.title")) {
@@ -47,12 +49,18 @@ class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.
         addRenderableWidget(openInputViewer)
     }
 
-    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
-        super.extractRenderState(graphics, mouseX, mouseY, a)
+    //? >=26.1 {
+//    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
+//        super.extractRenderState(graphics, mouseX, mouseY, a)
+    //?} else {
+    override fun render(graphics: GuiGraphics, i: Int, j: Int, f: Float) {
+        super.render(graphics, i, j, f)
+    //?}
 
         val stack = this.getStack()
 
         this.blitSlot(graphics, widgetX, widgetY, stack)
+
         graphics.text(
             this.font,
             stack.hoverName,
