@@ -5,7 +5,7 @@ import org.tywrapstudios.searck.config.IndexerOption
 import org.tywrapstudios.searck.config.SearckConfig
 import net.minecraft.server.packs.PackType
 
-//? >=1.21.11 && <26.1
+//? <26.1
 //import org.tywrapstudios.searck.platform.registerReloadListener
 
 //? >= 1.21.11 {

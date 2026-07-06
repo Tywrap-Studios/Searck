@@ -6,12 +6,12 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.Identifier
 *///?}
 
 //? >=1.21.11 {
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader
 import net.minecraft.server.packs.resources.PreparableReloadListener
-import net.minecraft.resources.Identifier
 //?} else {
 /*import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
