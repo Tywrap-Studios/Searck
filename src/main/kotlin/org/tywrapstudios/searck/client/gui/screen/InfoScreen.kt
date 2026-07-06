@@ -19,6 +19,7 @@ import org.tywrapstudios.searck.compat.containsEntries
 import org.tywrapstudios.searck.compat.getActiveViewer
 import org.tywrapstudios.searck.compat.jei.SearckJei
 import org.tywrapstudios.searck.compat.openViewer
+import org.tywrapstudios.searck.platform.vUtil
 
 @Environment(EnvType.CLIENT)
 class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.translatable("gui.searck.info_screen.title")) {
@@ -69,7 +70,7 @@ class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.
     }
 
     override fun onClose() {
-        this.minecraft.gui.setScreen(parent)
+        this.minecraft.vUtil.setScreen(parent)
     }
 
     private fun getStack() = ItemStack(this.itemLike)

@@ -25,6 +25,7 @@ import org.tywrapstudios.searck.compat.openViewer
 import org.tywrapstudios.searck.config.InfoAction
 import org.tywrapstudios.searck.config.SearckConfig
 import org.tywrapstudios.searck.math.StringCalculator
+import org.tywrapstudios.searck.platform.vUtil
 import org.tywrapstudios.searck.search.ItemIndex
 
 @Environment(EnvType.CLIENT)
@@ -82,7 +83,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                     when (SearckConfig.infoAction) {
                         InfoAction.OPEN_IN -> openViewer(IngredientRole.INPUT, searchItem, minecraft, this)
                         InfoAction.OPEN_OUT -> openViewer(IngredientRole.OUTPUT, searchItem, minecraft, this)
-                        else -> minecraft.gui.setScreen(InfoScreen(selected.itemLike, this))
+                        else -> minecraft.vUtil.setScreen(InfoScreen(selected.itemLike, this))
                     }
                     return super.keyPressed(event)
                 }
@@ -104,7 +105,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                     )
                     screen.slotClicked(slot, slot.index, inv.selectedSlot, ContainerInput.SWAP)
                 }
-                minecraft.gui.setScreen(null)
+                minecraft.vUtil.setScreen(null)
             }
         }
         return super.keyPressed(event)

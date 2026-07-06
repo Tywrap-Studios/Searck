@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack
 import org.tywrapstudios.searck.client.gui.screen.InfoScreen
 import org.tywrapstudios.searck.compat.jei.SearckJei
 import org.tywrapstudios.searck.compat.rei.SearckRei
+import org.tywrapstudios.searck.platform.vUtil
 
 fun getActiveViewer(): ActiveViewer {
 
@@ -57,7 +58,7 @@ fun openViewer(role: IngredientRole, stack: ItemStack, minecraft: Minecraft, par
             }
         }
         else -> {
-            minecraft.gui.setScreen(InfoScreen(stack.item, parent))
+            minecraft.vUtil.setScreen(InfoScreen(stack.item, parent))
         }
     }
 }

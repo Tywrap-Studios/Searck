@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory
 import org.tywrapstudios.searck.client.gui.screen.SearchScreen
 import org.tywrapstudios.searck.client.key.SearckKeys
 import org.tywrapstudios.searck.config.SearckConfig
+import org.tywrapstudios.searck.platform.vUtil
 import org.tywrapstudios.searck.search.ItemIndex
 
 object Searck : ClientModInitializer {
@@ -29,10 +30,10 @@ object Searck : ClientModInitializer {
     private fun events() {
         ClientTickEvents.END_CLIENT_TICK.register { client ->
             if (SearckKeys.OPEN_SEARCH.isDown) {
-                if (client.gui.screen() is SearchScreen) {
-                    client.gui.setScreen(null)
+                if (client.vUtil.getScreen() is SearchScreen) {
+                    client.vUtil.setScreen(null)
                 } else {
-                    client.gui.setScreen(SearchScreen())
+                    client.vUtil.setScreen(SearchScreen())
                 }
             }
         }
@@ -41,9 +42,6 @@ object Searck : ClientModInitializer {
     fun id(path: String) = id(MOD_ID, path)
 
     fun id(namespace: String, path: String): Identifier {
-        //? if <1.21 {
-        /*return Identifier(namespace, path)
-        *///?} else
         return Identifier.fromNamespaceAndPath(namespace, path)
     }
 }
