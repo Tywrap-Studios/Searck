@@ -11,9 +11,9 @@ import net.minecraft.network.chat.Component
 //? >=1.21.11 {
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader
 import net.minecraft.server.packs.resources.PreparableReloadListener
+import net.minecraft.resources.Identifier
 //?} else {
-/*import net.minecraft.resources.Identifier
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
+/*import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.core.DefaultedRegistry

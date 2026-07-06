@@ -5,6 +5,9 @@ import org.tywrapstudios.searck.config.IndexerOption
 import org.tywrapstudios.searck.config.SearckConfig
 import net.minecraft.server.packs.PackType
 
+//? >=1.21.11 && <26.1
+//import org.tywrapstudios.searck.platform.registerReloadListener
+
 //? >= 1.21.11 {
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader
 import net.minecraft.server.packs.resources.ResourceManager
@@ -18,7 +21,6 @@ import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.util.Unit
 import net.minecraft.util.profiling.ProfilerFiller
 import org.tywrapstudios.searck.platform.ResourceLoader
-import org.tywrapstudios.searck.platform.registerReloadListener
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
 
