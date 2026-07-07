@@ -74,7 +74,8 @@ object ARGB {
     }
 
     fun color(r: Int, g: Int, b: Int): Int {
-        return (255 and 255) shl 24 or (r and 255) shl 16 or (g and 255) shl 8 or b and 255
+        //(255 and 255) shl 24 or (r and 255) shl 16 or (g and 255) shl 8 or b and 255
+        return (255 shl 24) or (r shl 16) or (g shl 8) or b
     }
 }
 

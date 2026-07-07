@@ -214,14 +214,14 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
         //? >=26.1 {
         override fun getRowWidth() = if (scrollable()) this@SearchScreen.widgetWidth - this.scrollbarWidth()
         //?} else {
-        /*override fun getRowWidth() = if (scrollbarVisible()) this@SearchScreen.widgetWidth - 6
+        /*override fun getRowWidth() = if (scrollbarVisible()) this@SearchScreen.widgetWidth
         *///?}
         else this@SearchScreen.widgetWidth
 
         //? >=1.21.11 {
         override fun scrollBarX() = this.rowRight
         //?} else {
-        /*override fun getScrollbarPosition() = this.rowRight
+        /*override fun getScrollbarPosition() = this.rowRight - 6
         *///?}
 
         abstract inner class Entry : ObjectSelectionList.Entry<Entry>()
@@ -308,7 +308,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 a: Float
             ) {
                 //? <=1.21.11 {
-                /*val contentX = left
+                /*val contentX = left + 2
                 val contentY = top
                 val contentHeight = height
                 val contentXMiddle = left + width / 2
@@ -322,8 +322,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                     //?} else if >=1.21.11 {
                     /*renderSelection(graphics, this, color)
                     *///?} else {
-                    /*val p = if (this.isFocused) -1 else -8355712
-                    renderSelection(graphics, contentHeight, contentXMiddle, contentYMiddle, p, color)
+                    /*renderSelection(graphics, top, width, height, color, ARGB.color(0, 0, 0))
                     *///?}
                 }
                 val stack = this.getStack()
