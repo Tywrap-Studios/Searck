@@ -250,6 +250,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 hovered: Boolean,
                 a: Float
             ) {
+                //? <=1.21.11 {
+                /*val contentX = left
+                val contentY = top
+                val contentHeight = height
+                *///?}
                 graphics.text(
                     this@SearchScreen.font,
                     "=$solution",
@@ -303,7 +308,11 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 a: Float
             ) {
                 //? <=1.21.11 {
-                /*val contentHeight = height
+                /*val contentX = left
+                val contentY = top
+                val contentHeight = height
+                val contentXMiddle = left + width / 2
+                val contentYMiddle = top + height / 2
                 *///?}
                 if (minecraft.player!!.inventory.findSlotMatchingItem(this.getStack()) != -1) {
                     val color = if (this@ItemList.selected == this) ARGB.color(255, 232, 166)
