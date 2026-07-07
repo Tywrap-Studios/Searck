@@ -238,14 +238,14 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
             /*override fun render(
             *///?}
                 graphics: GuiGraphicsExtractor,
+                index: Int,
+                top: Int,
+                //? <=1.21.1 {
+                /*left: Int,
+                width: Int,
+                height: Int,
                 mouseX: Int,
                 mouseY: Int,
-                //? <=1.21.1 {
-                /*contentX: Int,
-                contentY: Int,
-                contentHeight: Int,
-                n: Int,
-                o: Int,
                 *///?}
                 hovered: Boolean,
                 a: Float
@@ -290,18 +290,21 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
             /*override fun render(
                 *///?}
                 graphics: GuiGraphicsExtractor,
-                i: Int,
-                j: Int,
+                index: Int,
+                top: Int,
                 //? <=1.21.1 {
-                /*contentX: Int,
-                contentY: Int,
-                contentHeight: Int,
-                contentXMiddle: Int,
-                contentYMiddle: Int,
+                /*left: Int,
+                width: Int,
+                height: Int,
+                mouseX: Int,
+                mouseY: Int,
                 *///?}
                 hovered: Boolean,
                 a: Float
             ) {
+                //? <=1.21.11 {
+                /*val contentHeight = height
+                *///?}
                 if (minecraft.player!!.inventory.findSlotMatchingItem(this.getStack()) != -1) {
                     val color = if (this@ItemList.selected == this) ARGB.color(255, 232, 166)
                     else ARGB.color(255, 186, 0)
