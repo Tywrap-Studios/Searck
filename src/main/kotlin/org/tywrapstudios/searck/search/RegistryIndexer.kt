@@ -43,9 +43,10 @@ object RegistryIndexer : ItemIndexer {
                     block.descriptionId
                 }
             }
+            val itemKey = BuiltInRegistries.ITEM.getKey(item)
             Searck.LOGGER.debug("Caching: {}, called {}", key, name)
-            Searck.LOGGER.debug("Cached block {} as {}", block, item)
-            cache[key] = name to block
+            Searck.LOGGER.debug("Cached block {} as {} ({})", block, item, itemKey)
+            cache[itemKey] = name to block
         }
     }
 
