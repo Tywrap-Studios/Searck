@@ -14,6 +14,13 @@ import org.tywrapstudios.searck.compat.jei.SearckJei
 import org.tywrapstudios.searck.compat.rei.SearckRei
 import org.tywrapstudios.searck.platform.vUtil
 
+//? <1.21.11 {
+/*import dev.emi.emi.api.EmiApi
+import dev.emi.emi.api.stack.EmiIngredient
+import org.tywrapstudios.searck.compat.emi.SearckEmi
+import net.minecraft.world.item.crafting.Ingredient
+*///?}
+
 fun getActiveViewer(): ActiveViewer {
 
     fun check(mod: String) = FabricLoader.getInstance().isModLoaded(mod)
@@ -28,7 +35,8 @@ fun getActiveViewer(): ActiveViewer {
 fun containsEntries(role: IngredientRole, stack: ItemStack): Boolean {
     return when (getActiveViewer()) {
         ActiveViewer.JEI -> SearckJei.containsEntries(role, stack)
-        ActiveViewer.EMI -> TODO("EMI integration")
+        //? <1.21.11
+        //ActiveViewer.EMI -> SearckEmi.containsEntries(role, stack)
         ActiveViewer.REI -> SearckRei.containsEntries(role, stack)
         else -> false
     }
@@ -44,9 +52,15 @@ fun openViewer(role: IngredientRole, stack: ItemStack, minecraft: Minecraft, par
             )
             SearckJei.runtime.recipesGui.show(focus)
         }
-        ActiveViewer.EMI -> {
-            TODO("EMI integration")
+        //? <1.21.11 {
+        /*ActiveViewer.EMI -> {
+            val ingredient = EmiIngredient.of(Ingredient.of(stack))
+            when (role) {
+                IngredientRole.OUTPUT -> EmiApi.displayRecipes(ingredient)
+                IngredientRole.INPUT -> EmiApi.displayUses(ingredient)
+            }
         }
+        *///?}
         ActiveViewer.REI -> {
             when (role) {
                 IngredientRole.OUTPUT -> ViewSearchBuilder.builder()
