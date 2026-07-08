@@ -25,7 +25,6 @@ import org.tywrapstudios.searck.search.ItemIndex
 //? >=26.1 {
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.world.inventory.ContainerInput
-//?} else {
 //?}
 
 //? >=1.21.11 {
@@ -33,7 +32,9 @@ import net.minecraft.client.input.KeyEvent
 import net.minecraft.client.input.MouseButtonEvent
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.util.ARGB
-//?}
+//?} else {
+/*import net.minecraft.client.Minecraft
+*///?}
 
 @Environment(EnvType.CLIENT)
 class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.title")) {
@@ -85,7 +86,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
         super.renderBackground(graphics, i, j, a)
     *///?}
         //? <1.21.11
-        //val minecraft = this.minecraft!!
+        //val minecraft = this.minecraft ?: Minecraft.getInstance()
         if (minecraft.level == null) {
             //? >=26.1 {
             this.extractPanorama(graphics, a)
@@ -102,7 +103,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
     *///?}
 
         //? <1.21.11
-        //val minecraft = this.minecraft!!
+        //val minecraft = this.minecraft ?: Minecraft.getInstance()
         //? >=1.21.11 {
         if (SearckKeys.QUICK_ACTION.matches(event)) {
         //?} else {
@@ -148,6 +149,10 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                         *///?}
                         player.inventoryMenu.slots.map { "$it (${it.index}, ${it.item})" }
                     )
+                    //? <1.21.11 {
+                    /*screen.minecraft = minecraft
+                    screen.recipeBookComponent.init(minecraft.window.width, minecraft.window.height, minecraft, false, player.inventoryMenu)
+                    *///?}
                     screen.slotClicked(slot, slot.index, inv.selectedSlot, ContainerInput.SWAP)
                 }
                 minecraft.vUtil.setScreen(null)

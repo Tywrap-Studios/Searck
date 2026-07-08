@@ -9,5 +9,7 @@ accessible method net/minecraft/client/gui/screens/inventory/AbstractRecipeBookS
 #accessible method net/minecraft/client/gui/screens/inventory/AbstractRecipeBookScreen slotClicked (Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ClickType;)V
 ##?} else {
 ##accessible method net/minecraft/client/gui/screens/inventory/InventoryScreen slotClicked (Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ClickType;)V
+##accessible field net/minecraft/client/gui/screens/Screen minecraft Lnet/minecraft/client/Minecraft;
+##accessible field net/minecraft/client/gui/screens/recipebook/RecipeBookComponent menu Lnet/minecraft/world/inventory/RecipeBookMenu;
 ##?}
 #?}

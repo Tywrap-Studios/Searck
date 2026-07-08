@@ -41,7 +41,7 @@ class MinecraftVersionUtil(val minecraft: Minecraft) {
 }
 
 val Minecraft?.vUtil: MinecraftVersionUtil
-    get() = MinecraftVersionUtil(this!!)
+    get() = MinecraftVersionUtil(this ?: Minecraft.getInstance())
 
 //? <26.1 {
 /*typealias GuiGraphicsExtractor = GuiGraphics

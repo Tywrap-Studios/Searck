@@ -26,6 +26,7 @@ import net.minecraft.client.renderer.RenderPipelines
 //?} else {
 /*import org.tywrapstudios.searck.platform.setTooltipForNextFrame
 import org.tywrapstudios.searck.platform.ARGB
+import net.minecraft.client.Minecraft
 *///?}
 
 @Environment(EnvType.CLIENT)
@@ -38,7 +39,7 @@ class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.
 
     override fun init() {
         //? <1.21.11
-        //val minecraft = this.minecraft!!
+        //val minecraft = this.minecraft ?: Minecraft.getInstance()
         openOutputViewer = Button.builder(
             Component.translatable("gui.searck.info_screen.button.open_output")
         ) { _ ->
