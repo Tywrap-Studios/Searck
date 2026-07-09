@@ -69,16 +69,19 @@ dependencies {
     // FuzzyKot
     includeImplementation("com.github.terrakok:fuzzykot:${property("deps.fuzzykot")}")
     // MidnightLib
+    val group = if (property("deps.midnightlib") == "1.6.4-fabric") "maven.modrinth" else "eu.midnightdust"
     if (sc.current.parsed >= "1.21.11") {
-        includeModImplementation("eu.midnightdust:midnightlib:${property("deps.midnightlib")}")
+        includeModImplementation("$group:midnightlib:${property("deps.midnightlib")}")
     } else {
-        modImplementation("eu.midnightdust:midnightlib:${property("deps.midnightlib")}")
+        modImplementation("$group:midnightlib:${property("deps.midnightlib")}")
     }
 
-    // Compile against the JEI API but do not include it at runtime
-    modCompileOnly("mezz.jei:jei-${sc.current.version}-fabric-api:${property("deps.jei")}")
-    // At runtime, use the full JEI jar for Fabric
-    modRuntimeOnly("mezz.jei:jei-${sc.current.version}-fabric:${property("deps.jei")}")
+    if (!(sc.current.parsed eq "1.21.2")) {
+        // Compile against the JEI API but do not include it at runtime
+        modCompileOnly("mezz.jei:jei-${sc.current.version}-fabric-api:${property("deps.jei")}")
+        // At runtime, use the full JEI jar for Fabric
+        modRuntimeOnly("mezz.jei:jei-${sc.current.version}-fabric:${property("deps.jei")}")
+    }
 
     // EMI (only exists on 1.21(.1) right now
     if (sc.current.parsed <= "1.21.1") {
