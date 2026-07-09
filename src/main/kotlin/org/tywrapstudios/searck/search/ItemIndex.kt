@@ -14,11 +14,9 @@ import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener
 
 //?} else {
-/*import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
+/*import net.fabricmc.fabric.api.resource.SimpleResourceReloadListener
 import net.minecraft.resources.Identifier
-import net.minecraft.server.packs.resources.PreparableReloadListener
 import net.minecraft.server.packs.resources.ResourceManager
-import net.minecraft.util.Unit
 import net.minecraft.util.profiling.ProfilerFiller
 import org.tywrapstudios.searck.platform.ResourceLoader
 import java.util.concurrent.CompletableFuture
@@ -29,34 +27,38 @@ import java.util.concurrent.Executor
 //? >=1.21.11 {
 object ItemIndex : ResourceManagerReloadListener {
 //?} else {
-/*object ItemIndex : IdentifiableResourceReloadListener {
+/*object ItemIndex : SimpleResourceReloadListener<Unit> {
 *///?}
     private val hasIndexed = mutableMapOf<ItemIndexer, Boolean>()
 
     //? >=1.21.11 {
     override fun onResourceManagerReload(resourceManager: ResourceManager) {
+        index()
+    }
     //?} else {
-    /*override fun reload(
-        preparationBarrier: PreparableReloadListener.PreparationBarrier,
-        resourceManager: ResourceManager,
-        profilerFiller: ProfilerFiller,
-        profilerFiller2: ProfilerFiller,
-        executor: Executor,
-        executor2: Executor
+
+    /*override fun load(
+        manager: ResourceManager,
+        profiler: ProfilerFiller,
+        executor: Executor
+    ): CompletableFuture<Unit> {
+        return CompletableFuture.completedFuture(Unit)
+    }
+
+    override fun apply(
+        data: Unit,
+        manager: ResourceManager,
+        profiler: ProfilerFiller,
+        executor: Executor
     ): CompletableFuture<Void> {
+        return CompletableFuture.runAsync(::index)
+    }
+
     *///?}
-        //? <1.21.11 {
-        /*return preparationBarrier.wait<Unit>(Unit.INSTANCE).thenRunAsync( {
-            profilerFiller2.startTick()
-            profilerFiller2.push("listener")
-            *///?}
-            Searck.LOGGER.info("Reloaded: Indexing items...")
-            getActive().index()
-            //? <1.21.11 {
-            /*profilerFiller2.pop()
-            profilerFiller2.endTick()
-        }, executor2)
-        *///?}
+
+    private fun index() {
+        Searck.LOGGER.info("Reloaded: Indexing items...")
+        getActive().index()
     }
 
     @OptIn(ExperimentalStdlibApi::class)
