@@ -1,3 +1,4 @@
+//? >1.21.2 || <1.21.2 {
 package org.tywrapstudios.searck.compat.jei
 
 import mezz.jei.api.IModPlugin
@@ -38,3 +39,4 @@ object SearckJei : IModPlugin, RecipeViewer {
             .isNotEmpty()
     }
 }
+//?}

@@ -27,6 +27,8 @@ import net.minecraft.client.renderer.RenderPipelines
 /*import org.tywrapstudios.searck.platform.setTooltipForNextFrame
 import org.tywrapstudios.searck.platform.ARGB
 import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.RenderType
+
 *///?}
 
 @Environment(EnvType.CLIENT)
@@ -102,7 +104,9 @@ class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.
         val sprite = Identifier.withDefaultNamespace("container/slot")
         //? >=1.21.11 {
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 18, 18)
-        //?} else {
+        //?} else >=1.21.2 {
+        /*graphics.blitSprite(RenderType::guiTextured, sprite, x, y, 18, 18)
+        *///?} else {
         /*graphics.blitSprite(sprite, x, y, 0, 18, 18)
         *///?}
     }

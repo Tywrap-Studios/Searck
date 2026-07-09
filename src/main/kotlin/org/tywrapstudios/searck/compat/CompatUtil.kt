@@ -3,18 +3,21 @@ package org.tywrapstudios.searck.compat
 import me.shedaniel.rei.api.client.view.ViewSearchBuilder
 import me.shedaniel.rei.api.common.entry.EntryStack
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes
-import mezz.jei.api.constants.VanillaTypes
-import mezz.jei.api.recipe.RecipeIngredientRole
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.world.item.ItemStack
 import org.tywrapstudios.searck.client.gui.screen.InfoScreen
-import org.tywrapstudios.searck.compat.jei.SearckJei
 import org.tywrapstudios.searck.compat.rei.SearckRei
 import org.tywrapstudios.searck.platform.vUtil
 
-//? <1.21.11 {
+//? >1.21.2 || <1.21.2 {
+import mezz.jei.api.constants.VanillaTypes
+import mezz.jei.api.recipe.RecipeIngredientRole
+import org.tywrapstudios.searck.compat.jei.SearckJei
+//?}
+
+//? <=1.21.1 {
 /*import dev.emi.emi.api.EmiApi
 import dev.emi.emi.api.stack.EmiIngredient
 import org.tywrapstudios.searck.compat.emi.SearckEmi
@@ -34,8 +37,9 @@ fun getActiveViewer(): ActiveViewer {
 
 fun containsEntries(role: IngredientRole, stack: ItemStack): Boolean {
     return when (getActiveViewer()) {
+        //? >1.21.2 || <1.21.2
         ActiveViewer.JEI -> SearckJei.containsEntries(role, stack)
-        //? <1.21.11
+        //? <=1.21.1
         //ActiveViewer.EMI -> SearckEmi.containsEntries(role, stack)
         ActiveViewer.REI -> SearckRei.containsEntries(role, stack)
         else -> false
@@ -45,6 +49,7 @@ fun containsEntries(role: IngredientRole, stack: ItemStack): Boolean {
 fun openViewer(role: IngredientRole, stack: ItemStack, minecraft: Minecraft, parent: Screen) {
     val active = getActiveViewer()
     when (active) {
+        //? >1.21.2 || <1.21.2 {
         ActiveViewer.JEI -> {
             val jeiRole = if (role == IngredientRole.INPUT) RecipeIngredientRole.INPUT else RecipeIngredientRole.OUTPUT
             val focus = SearckJei.runtime.jeiHelpers.focusFactory.createFocus(
@@ -52,7 +57,8 @@ fun openViewer(role: IngredientRole, stack: ItemStack, minecraft: Minecraft, par
             )
             SearckJei.runtime.recipesGui.show(focus)
         }
-        //? <1.21.11 {
+        //?}
+        //? <=1.21.1 {
         /*ActiveViewer.EMI -> {
             val ingredient = EmiIngredient.of(Ingredient.of(stack))
             when (role) {

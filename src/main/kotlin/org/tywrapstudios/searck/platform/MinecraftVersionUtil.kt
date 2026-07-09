@@ -91,9 +91,13 @@ fun ResourceLoader.registerReloadListener(id: Identifier, reloader: Identifiable
     this.registerReloadListener(reloader)
 }
 
+
+//? >1.21.2 {
 fun <T> DefaultedRegistry<T>.getValue(id: Identifier): T {
     return this.get(id)
 }
+//?}
+
 *///?}
 
 *///?}

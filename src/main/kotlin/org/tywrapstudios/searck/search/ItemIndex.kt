@@ -39,7 +39,8 @@ object ItemIndex : ResourceManagerReloadListener {
 
     /*override fun load(
         manager: ResourceManager,
-        profiler: ProfilerFiller,
+        //? <=1.21.1
+        //profiler: ProfilerFiller,
         executor: Executor
     ): CompletableFuture<Unit> {
         return CompletableFuture.completedFuture(Unit)
@@ -48,7 +49,8 @@ object ItemIndex : ResourceManagerReloadListener {
     override fun apply(
         data: Unit,
         manager: ResourceManager,
-        profiler: ProfilerFiller,
+        //? <=1.21.1
+        //profiler: ProfilerFiller,
         executor: Executor
     ): CompletableFuture<Void> {
         return CompletableFuture.runAsync(::index)

@@ -34,6 +34,9 @@ import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.util.ARGB
 //?} else {
 /*import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.RenderType.guiTextured
+
 *///?}
 
 @Environment(EnvType.CLIENT)
@@ -151,6 +154,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                     )
                     //? <1.21.11 {
                     /*screen.minecraft = minecraft
+                    //? =1.21.1
                     screen.recipeBookComponent.init(minecraft.window.width, minecraft.window.height, minecraft, false, player.inventoryMenu)
                     *///?}
                     screen.slotClicked(slot, slot.index, inv.selectedSlot, ContainerInput.SWAP)
@@ -245,7 +249,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 graphics: GuiGraphicsExtractor,
                 index: Int,
                 top: Int,
-                //? <=1.21.1 {
+                //? <=1.21.2 {
                 /*left: Int,
                 width: Int,
                 height: Int,
@@ -255,7 +259,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 hovered: Boolean,
                 a: Float
             ) {
-                //? <=1.21.1 {
+                //? <=1.21.2 {
                 /*val contentX = left
                 val contentY = top
                 val contentHeight = height
@@ -302,7 +306,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 graphics: GuiGraphicsExtractor,
                 index: Int,
                 top: Int,
-                //? <=1.21.1 {
+                //? <=1.21.2 {
                 /*left: Int,
                 width: Int,
                 height: Int,
@@ -312,7 +316,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 hovered: Boolean,
                 a: Float
             ) {
-                //? <=1.21.1 {
+                //? <=1.21.2 {
                 /*val contentX = left + 2
                 val contentY = top
                 val contentHeight = height
@@ -355,7 +359,9 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 val sprite = Identifier.withDefaultNamespace("container/slot")
                 //? >=1.21.11 {
                 graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 18, 18)
-                //?} else {
+                //?} else >=1.21.2 {
+                /*graphics.blitSprite(RenderType::guiTextured, sprite, x, y, 18, 18)
+                *///?} else {
                 /*graphics.blitSprite(sprite, x, y, 0, 18, 18)
                 *///?}
             }

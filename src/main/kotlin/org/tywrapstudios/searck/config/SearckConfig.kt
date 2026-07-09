@@ -10,6 +10,7 @@ class SearckConfig : MidnightConfig() {
         @Entry(category = SEARCH) @JvmField
         var indexer: IndexerOption = IndexerOption.REGISTRY
 
+        //? !1.21.2
         @Condition(requiredOption = "searck:indexer", requiredValue = ["CUSTOM"])
         @Entry(category = SEARCH) @JvmField
         var customIndexer: String = ""

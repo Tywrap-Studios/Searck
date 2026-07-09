@@ -45,7 +45,7 @@
   "mixins": [
     "searck.mixins.json"
   ],
-  "accessWidener": "searck.ct",
+  "accessWidener": "searck.ct.old",
   "depends": {
     "fabricloader": ">=0.17",
     "minecraft": "${minecraft}",

@@ -1,4 +1,4 @@
-//? <1.21.11 {
+//? <=1.21.1 {
 /*package org.tywrapstudios.searck.compat.emi
 
 import dev.emi.emi.api.EmiApi

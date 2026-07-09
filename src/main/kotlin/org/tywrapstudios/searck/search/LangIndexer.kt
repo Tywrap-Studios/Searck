@@ -4,7 +4,7 @@ import net.minecraft.client.resources.language.ClientLanguage
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.level.ItemLike
 import org.tywrapstudios.searck.Searck
-//? <1.21.11
+//? <1.21.2
 //import org.tywrapstudios.searck.platform.getValue
 
 object LangIndexer : ItemIndexer {
