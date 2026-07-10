@@ -1,4 +1,4 @@
-//? >1.21.2 || <1.21.2 {
+//? >1.21.4 || <1.21.2 {
 package org.tywrapstudios.searck.compat.jei
 
 import mezz.jei.api.IModPlugin
