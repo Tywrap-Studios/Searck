@@ -92,11 +92,11 @@ fun ResourceLoader.registerReloadListener(id: Identifier, reloader: Identifiable
 }
 
 
-//? >1.21.2 {
-fun <T> DefaultedRegistry<T>.getValue(id: Identifier): T {
+//? <1.21.2 {
+/*fun <T> DefaultedRegistry<T>.getValue(id: Identifier): T {
     return this.get(id)
 }
-//?}
+*///?}
 
 *///?}
 

@@ -35,7 +35,10 @@ import net.minecraft.util.ARGB
 //?} else {
 /*import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.RenderType.guiTextured
+
+//? =1.21.2 {
+/*import net.minecraft.client.renderer.RenderType.guiTextured
+*///?}
 
 *///?}
 
@@ -155,7 +158,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                     //? <1.21.11 {
                     /*screen.minecraft = minecraft
                     //? =1.21.1
-                    screen.recipeBookComponent.init(minecraft.window.width, minecraft.window.height, minecraft, false, player.inventoryMenu)
+                    //screen.recipeBookComponent.init(minecraft.window.width, minecraft.window.height, minecraft, false, player.inventoryMenu)
                     *///?}
                     screen.slotClicked(slot, slot.index, inv.selectedSlot, ContainerInput.SWAP)
                 }
