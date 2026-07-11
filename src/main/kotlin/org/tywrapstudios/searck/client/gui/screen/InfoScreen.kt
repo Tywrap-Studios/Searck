@@ -20,16 +20,16 @@ import org.tywrapstudios.searck.platform.fakeItem
 import org.tywrapstudios.searck.platform.text
 *///?}
 
-//? >=1.21.11 {
+//? >=1.21.6 {
 import net.minecraft.util.ARGB
 import net.minecraft.client.renderer.RenderPipelines
 //?} else {
 /*import org.tywrapstudios.searck.platform.setTooltipForNextFrame
 import org.tywrapstudios.searck.platform.ARGB
-import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.RenderType
-
 *///?}
+
+import net.minecraft.client.Minecraft
 
 @Environment(EnvType.CLIENT)
 class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.translatable("gui.searck.info_screen.title")) {
@@ -102,7 +102,7 @@ class InfoScreen(val itemLike: ItemLike, val parent: Screen) : Screen(Component.
 
     private fun blitSlotBg(graphics: GuiGraphicsExtractor, x: Int, y: Int) {
         val sprite = Identifier.withDefaultNamespace("container/slot")
-        //? >=1.21.11 {
+        //? >=1.21.6 {
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 18, 18)
         //?} else >=1.21.2 {
         /*graphics.blitSprite(RenderType::guiTextured, sprite, x, y, 18, 18)

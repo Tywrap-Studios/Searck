@@ -15,9 +15,12 @@ import net.minecraft.server.packs.resources.PreparableReloadListener
 //?} else {
 /*import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
-import net.minecraft.world.entity.player.Inventory
+
+//? <1.21.6 {
+/*import net.minecraft.world.entity.player.Inventory
 import net.minecraft.core.DefaultedRegistry
 import net.minecraft.server.packs.resources.PreparableReloadListener
+*///?}
 *///?}
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
@@ -64,6 +67,8 @@ fun ResourceLoader.registerReloadListener(id: Identifier, reloader: PreparableRe
     this.registerReloader(id, reloader)
 }
 //?} else {
+
+/*//? <1.21.6 {
 /*fun GuiGraphicsExtractor.setTooltipForNextFrame(font: Font, stack: ItemStack, i: Int, j: Int) {
     this.renderTooltip(font, stack, i, j)
 }
@@ -78,19 +83,19 @@ object ARGB {
         return (255 shl 24) or (r shl 16) or (g shl 8) or b
     }
 }
-
 var Inventory.selectedSlot: Int
     set(value) {
         this.selected = value
     }
     get() = this.selected
 
+*///?}
+
 typealias ResourceLoader = ResourceManagerHelper
 
 fun ResourceLoader.registerReloadListener(id: Identifier, reloader: IdentifiableResourceReloadListener) {
     this.registerReloadListener(reloader)
 }
-
 
 //? <1.21.2 {
 /*fun <T> DefaultedRegistry<T>.getValue(id: Identifier): T {

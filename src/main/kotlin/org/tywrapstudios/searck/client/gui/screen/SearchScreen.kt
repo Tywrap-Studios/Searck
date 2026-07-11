@@ -30,8 +30,12 @@ import net.minecraft.world.inventory.ContainerInput
 //? >=1.21.11 {
 import net.minecraft.client.input.KeyEvent
 import net.minecraft.client.input.MouseButtonEvent
+//?}
+
+//? >=1.21.6 {
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.util.ARGB
+import net.minecraft.client.Minecraft
 //?} else {
 /*import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.RenderType
@@ -252,7 +256,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 graphics: GuiGraphicsExtractor,
                 index: Int,
                 top: Int,
-                //? <=1.21.4 {
+                //? <=1.21.6 {
                 /*left: Int,
                 width: Int,
                 height: Int,
@@ -262,7 +266,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 hovered: Boolean,
                 a: Float
             ) {
-                //? <=1.21.4 {
+                //? <=1.21.6 {
                 /*val contentX = left
                 val contentY = top
                 val contentHeight = height
@@ -309,7 +313,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 graphics: GuiGraphicsExtractor,
                 index: Int,
                 top: Int,
-                //? <=1.21.4 {
+                //? <=1.21.6 {
                 /*left: Int,
                 width: Int,
                 height: Int,
@@ -319,7 +323,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
                 hovered: Boolean,
                 a: Float
             ) {
-                //? <=1.21.4 {
+                //? <=1.21.6 {
                 /*val contentX = left + 2
                 val contentY = top
                 val contentHeight = height
@@ -360,7 +364,7 @@ class SearchScreen : Screen(Component.translatable("gui.searck.search_screen.tit
 
             private fun blitSlotBg(graphics: GuiGraphicsExtractor, x: Int, y: Int) {
                 val sprite = Identifier.withDefaultNamespace("container/slot")
-                //? >=1.21.11 {
+                //? >=1.21.6 {
                 graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, 18, 18)
                 //?} else >=1.21.2 {
                 /*graphics.blitSprite(RenderType::guiTextured, sprite, x, y, 18, 18)
