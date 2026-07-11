@@ -7,3 +7,5 @@ accessible method net/minecraft/client/gui/screens/inventory/InventoryScreen slo
 accessible field net/minecraft/client/gui/screens/Screen minecraft Lnet/minecraft/client/Minecraft;
 accessible field net/minecraft/client/gui/screens/recipebook/RecipeBookComponent menu Lnet/minecraft/world/inventory/RecipeBookMenu;
 accessible field net/minecraft/client/gui/screens/inventory/AbstractRecipeBookScreen recipeBookComponent Lnet/minecraft/client/gui/screens/recipebook/RecipeBookComponent;
+accessible field net/minecraft/world/entity/player/Inventory selected I
+accessible field net/minecraft/world/entity/player/Inventory items Lnet/minecraft/core/NonNullList;
