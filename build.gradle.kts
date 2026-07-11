@@ -1,6 +1,9 @@
+import dev.kikugie.stonecutter.data.ParsedVersion
+
 plugins {
     // This plugin applies the correct loom variant based on the Minecraft version
     id("dev.kikugie.loom-back-compat")
+    id("me.modmuss50.mod-publish-plugin") version "2.1.1"
     kotlin("jvm") version "2.4.0"
 }
 
@@ -39,6 +42,12 @@ repositories {
     maven("https://maven.shedaniel.me")
 }
 
+val midnightParsed = ParsedVersion(property("deps.midnightlib").toString())
+val doJei = sc.current.parsed < "1.21.2" || sc.current.parsed > "1.21.9"
+val doEmi = sc.current.parsed <= "1.21.1"
+val doRei = true
+val doReiLocal = sc.current.parsed >= "1.21.2" && sc.current.parsed <= "1.21.9"
+
 dependencies {
     /**
      * Fetches only the required Fabric API modules to not waste time downloading all of them for each version.
@@ -69,11 +78,10 @@ dependencies {
     // FuzzyKot
     includeImplementation("com.github.terrakok:fuzzykot:${property("deps.fuzzykot")}")
     // MidnightLib
-    val group = if (property("deps.midnightlib") == "1.6.4-fabric" || property("deps.midnightlib") == "1.7.3+1.21.4-fabric") "maven.modrinth" else "eu.midnightdust"
-    if (sc.current.parsed >= "1.21.6") {
-        includeModImplementation("$group:midnightlib:${property("deps.midnightlib")}")
+    if (midnightParsed >= "1.9.0") {
+        includeModImplementation("eu.midnightdust:midnightlib:${property("deps.midnightlib")}")
     } else {
-        modImplementation("$group:midnightlib:${property("deps.midnightlib")}")
+        modImplementation("maven.modrinth:midnightlib:${property("deps.midnightlib")}")
     }
 
     if (sc.current.parsed < "1.21.2" || sc.current.parsed > "1.21.9") {
@@ -187,5 +195,43 @@ tasks {
         // loomx.mod(Sources)Jar returns the jar task for the applied loom variant
         from(loomx.modJar.flatMap { it.archiveFile }, loomx.modSourcesJar.flatMap { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
+    }
+}
+
+publishMods {
+    file = loomx.modJar.map { it.archiveFile.get() }
+    additionalFiles.from(loomx.modSourcesJar.map { it.archiveFile.get() })
+    displayName = "${property("mod.name")} ${property("mod.version")} for ${sc.current.project}"
+
+    version = rootProject.version as String
+    changelog = rootProject.file("CHANGELOG.md").readText()
+    type = STABLE
+    modLoaders.add("fabric")
+
+    dryRun = providers.environmentVariable("MODRINTH_TOKEN").getOrNull() == null
+
+    modrinth {
+        projectId = property("publish.modrinth") as String
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        minecraftVersions.addAll(compatibleVersions)
+        environment = CLIENT_ONLY
+
+        requires("fabric-api", "fabric-language-kotlin")
+
+        if (midnightParsed < "1.9.0") {
+            requires {
+                slug = "midnightlib"
+                version = property("deps.midnightlib") as String
+            }
+        } else {
+            embeds {
+                slug = "midnightlib"
+                version = property("deps.midnightlib") as String
+            }
+        }
+
+        if (doJei) optional("jei")
+        if (doEmi) optional("emi")
+        if (doRei) optional("rei")
     }
 }

@@ -4,6 +4,8 @@ mod.name = "Searck"
 mod.group = "org.tywrapstudios"
 mod.version = "1.0.0"
 
+publish.modrinth = "W4wJvWfW"
+
 deps.fabric_loader = "0.19.3"
 deps.flk = "1.13.12+kotlin.2.4.0"
 loomx.loom_version = "1.17-SNAPSHOT"
