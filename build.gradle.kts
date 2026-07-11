@@ -5,6 +5,8 @@ plugins {
     id("dev.kikugie.loom-back-compat")
     id("me.modmuss50.mod-publish-plugin") version "2.1.1"
     kotlin("jvm") version "2.4.0"
+    id("org.jetbrains.dokka") version "2.2.0"
+    `maven-publish`
 }
 
 // DO NOT set group = ...!
@@ -234,5 +236,31 @@ publishMods {
         if (doJei) optional("jei")
         if (doEmi) optional("emi")
         if (doRei) optional("rei")
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "tywrapStudiosMvnReleases"
+            url = uri("https://maven.tiazzz.me/releases")
+            credentials {
+                username = System.getenv("TS_MAVEN_USERNAME")
+                password = System.getenv("TS_MAVEN_SECRET")
+            }
+        }
+        maven {
+            name = "tywrapStudiosMvnBackup"
+            url = uri("https://repo.repsy.io/itstiazzz/maven")
+            credentials {
+                username = System.getenv("REPSY_USERNAME")
+                password = System.getenv("REPSY_SECRET")
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("maven") {
+            from(components["java"])
+        }
     }
 }
