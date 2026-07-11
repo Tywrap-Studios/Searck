@@ -14,7 +14,7 @@ import org.tywrapstudios.searck.Searck
 
 @Environment(EnvType.CLIENT)
 object SearckKeys {
-    //? >=1.21.11 {
+    //? >=1.21.9 {
     val CATEGORY = KeyMapping.Category.register(Searck.id("searck_category"))
     //?} else {
     /*val CATEGORY = "searck_category"
