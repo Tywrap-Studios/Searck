@@ -76,7 +76,7 @@ dependencies {
         modImplementation("$group:midnightlib:${property("deps.midnightlib")}")
     }
 
-    if (!(sc.current.parsed eq "1.21.2") && !(sc.current.parsed eq "1.21.4")) {
+    if (sc.current.parsed < "1.21.2" || sc.current.parsed > "1.21.6") {
         // Compile against the JEI API but do not include it at runtime
         modCompileOnly("mezz.jei:jei-${sc.current.version}-fabric-api:${property("deps.jei")}")
         // At runtime, use the full JEI jar for Fabric
@@ -92,12 +92,13 @@ dependencies {
     // Compile against the REI API but do not include it at runtime
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${property("deps.rei")}")
     // At runtime, use the full REI jar for Fabric
-    if (sc.current.parsed eq "1.21.2" || sc.current.parsed eq "1.21.4") {
+    if (sc.current.parsed >= "1.21.2" && sc.current.parsed <= "1.21.6") {
         modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${property("deps.rei")}")
     }
 
     // Fabric API
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
+
 //    if (sc.current.parsed < "26.1") {
 //        fapi("fabric-key-binding-api-v1")
 //    } else {
