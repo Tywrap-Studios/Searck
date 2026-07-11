@@ -7,6 +7,9 @@
   "authors": [
     "Tywrap Studios"
   ],
+  "contributors": [
+    "ItsTiazzz - Lead Developer"
+  ],
   "contact": {
     "homepage": "https://tywrap-studios.tiazzz.me",
     "sources": "https://github.com/Tywrap-Studios/Searck",
@@ -15,7 +18,7 @@
   },
   "license": "TYSPAL-3.0",
   "icon": "assets/searck/icon.png",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "client": [
       {
