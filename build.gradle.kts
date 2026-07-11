@@ -8,7 +8,8 @@ plugins {
 }
 
 // DO NOT set group = ...!
-version = "${property("mod.version")}+${sc.current.version}"
+val fullVersion = "${property("mod.version")}+${sc.current.version}"
+version = fullVersion
 base.archivesName = property("mod.id") as String
 
 val requiredJava: JavaVersion = when {
@@ -203,7 +204,7 @@ publishMods {
     additionalFiles.from(loomx.modSourcesJar.map { it.archiveFile.get() })
     displayName = "${property("mod.name")} ${property("mod.version")} for ${sc.current.project}"
 
-    version = rootProject.version as String
+    version = fullVersion
     changelog = rootProject.file("CHANGELOG.md").readText()
     type = STABLE
     modLoaders.add("fabric")
