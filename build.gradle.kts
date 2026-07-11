@@ -70,13 +70,13 @@ dependencies {
     includeImplementation("com.github.terrakok:fuzzykot:${property("deps.fuzzykot")}")
     // MidnightLib
     val group = if (property("deps.midnightlib") == "1.6.4-fabric" || property("deps.midnightlib") == "1.7.3+1.21.4-fabric") "maven.modrinth" else "eu.midnightdust"
-    if (sc.current.parsed >= "1.21.11") {
+    if (sc.current.parsed >= "1.21.6") {
         includeModImplementation("$group:midnightlib:${property("deps.midnightlib")}")
     } else {
         modImplementation("$group:midnightlib:${property("deps.midnightlib")}")
     }
 
-    if (sc.current.parsed < "1.21.2" || sc.current.parsed > "1.21.6") {
+    if (sc.current.parsed < "1.21.2" || sc.current.parsed > "1.21.9") {
         // Compile against the JEI API but do not include it at runtime
         modCompileOnly("mezz.jei:jei-${sc.current.version}-fabric-api:${property("deps.jei")}")
         // At runtime, use the full JEI jar for Fabric
@@ -92,7 +92,7 @@ dependencies {
     // Compile against the REI API but do not include it at runtime
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${property("deps.rei")}")
     // At runtime, use the full REI jar for Fabric
-    if (sc.current.parsed >= "1.21.2" && sc.current.parsed <= "1.21.6") {
+    if (sc.current.parsed >= "1.21.2" && sc.current.parsed <= "1.21.9") {
         modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${property("deps.rei")}")
     }
 
