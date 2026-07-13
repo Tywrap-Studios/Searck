@@ -217,7 +217,9 @@ publishMods {
     modrinth {
         projectId = property("publish.modrinth") as String
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
-        projectDescription = rootProject.file("README.md").readText().replace("./README-DEVS.md", "https://github.com/Tywrap-Studios/Searck/blob/main/README-DEVS.md")
+        projectDescription = rootProject.file("README.md").readText()
+            .replace("./README-DEVS.md", "https://github.com/Tywrap-Studios/Searck/blob/main/README-DEVS.md")
+            .replace("./branding/searck-banner-rounded.png", "https://raw.githubusercontent.com/Tywrap-Studios/Searck/main/branding/searck-banner-rounded.png")
 
         minecraftVersions.addAll(compatibleVersions)
         environment = CLIENT_ONLY

@@ -1,6 +1,8 @@
 <div align="center">
   <h1>Searck</h1>
 
+![banner](./branding/searck-banner-rounded.png)
+
 [![fabric-api](https://raw.githubusercontent.com/intergrav/devins-badges/refs/heads/v3/assets/cozy/requires/fabric-api_vector.svg)](https://modrinth.com/mod/fabric-api)
 [![fabric-language-kotlin](https://raw.githubusercontent.com/intergrav/devins-badges/refs/heads/v3/assets/cozy/requires/fabric-language-kotlin_vector.svg)](https://modrinth.com/mod/fabric-language-kotlin)
 
