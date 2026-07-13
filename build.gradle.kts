@@ -1,4 +1,5 @@
 import dev.kikugie.stonecutter.data.ParsedVersion
+import kotlin.text.replace
 
 plugins {
     // This plugin applies the correct loom variant based on the Minecraft version
@@ -216,6 +217,8 @@ publishMods {
     modrinth {
         projectId = property("publish.modrinth") as String
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        projectDescription = rootProject.file("README.md").readText().replace("./README-DEVS.md", "https://github.com/Tywrap-Studios/Searck/blob/main/README-DEVS.md")
+
         minecraftVersions.addAll(compatibleVersions)
         environment = CLIENT_ONLY
 
