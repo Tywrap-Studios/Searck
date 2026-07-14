@@ -266,6 +266,10 @@ publishing {
     publications {
         register<MavenPublication>("maven") {
             from(components["java"])
+
+            groupId = property("mod.group") as String
+            artifactId = property("mod.id") as String
+            version = fullVersion
         }
     }
 }
