@@ -36,8 +36,8 @@ The search menu aims to be as true to Minecraft as possible, making it great for
 any modpack, especially Vanilla+ ones! So, get right to searchin'!
 
 ## Installing
-[![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/searck/versions)
-[![github](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/github_vector.svg)](https://github.com/Tywrap-Studios/Searck/releases)
+[![modrinth](https://raw.githubusercontent.com/intergrav/devins-badges/refs/heads/v3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/searck/versions)
+[![github](https://raw.githubusercontent.com/intergrav/devins-badges/refs/heads/v3/assets/cozy/available/github_vector.svg)](https://github.com/Tywrap-Studios/Searck/releases)
 
 ## For developers
 
