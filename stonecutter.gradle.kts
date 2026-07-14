@@ -6,6 +6,7 @@ stonecutter active "26.2.x"
 
 stonecutter tasks {
     order("publishModrinth")
+    order("publish")
 }
 
 // See https://stonecutter.kikugie.dev/wiki/config/params
