@@ -41,8 +41,8 @@ any modpack, especially Vanilla+ ones! So, get right to searchin'!
 
 ### Compatibility table
 
-| Minecraft Version | JEI, REI or EMI | MidnightLib              |
-|-------------------|-----------------|--------------------------|
+| Minecraft Version | JEI, REI or EMI  | MidnightLib               |
+|-------------------|------------------|---------------------------|
 | 1.21-1.21.1       | ✅ All           | ⚠️ Manual Install Needed |
 | 1.21.2-1.21.3     | ⚠️ Just REI     | ⚠️ Manual Install Needed |
 | 1.21.4-1.21.5     | ⚠️ Just REI     | ⚠️ Manual Install Needed |
@@ -50,7 +50,8 @@ any modpack, especially Vanilla+ ones! So, get right to searchin'!
 | 1.21.9-1.21.10    | ⚠️ Just REI     | ✅ Included               |
 | 1.21.11           | ⚠️ JEI and REI  | ✅ Included               |
 | 26.1.x            | ⚠️ JEI and REI  | ✅ Included               |
-| 26.2(.x)          | ⚠️ JEI and REI  | ✅ Included               |
+| 26.2              | ⚠️ JEI and REI  | ✅ Included               |
+| 26.3(.x)          | ⚠️ JEI and REI  | ✅ Included               |
 
 ## For developers
 
