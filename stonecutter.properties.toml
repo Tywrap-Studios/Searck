@@ -2,7 +2,7 @@
 mod.id = "searck"
 mod.name = "Searck"
 mod.group = "org.tywrapstudios"
-mod.version = "1.0.0"
+mod.version = "1.0.1"
 
 publish.modrinth = "W4wJvWfW"
 
@@ -68,7 +68,7 @@ deps.jei = "27.13.0.43"
 deps.rei = "21.11.816"
 
 ["26.1.x"]
-mod.mc_compat = "~26.1"
+mod.mc_compat = "~26.1-"
 mod.mc_releases = ["26.1", "26.1.1", "26.1.2"]
 
 deps.fabric_api = "0.152.1+26.1.2"
@@ -77,10 +77,19 @@ deps.jei = "29.12.0.40"
 deps.rei = "26.1.819"
 
 ["26.2.x"]
-mod.mc_compat = "~26.2"
+mod.mc_compat = "~26.2-"
 mod.mc_releases = ["26.2"]
 
 deps.fabric_api = "0.153.0+26.2"
 deps.midnightlib = "1.9.3+26.2-fabric"
 deps.jei = "30.7.0.37"
 deps.rei = "26.2.820"
+
+["26.3.x"]
+mod.mc_compat = "~26.3-"
+mod.mc_releases = ["26.3"]
+
+deps.fabric_api = "0.161.0+26.3"
+deps.midnightlib = "1.9.3+26.3-fabric"
+deps.jei = "31.9.0.58"
+deps.rei = "26.3.823"

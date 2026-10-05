@@ -24,6 +24,7 @@ import net.minecraft.server.packs.resources.PreparableReloadListener
 *///?}
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
+import com.mojang.blaze3d.platform.InputConstants
 
 class MinecraftVersionUtil(val minecraft: Minecraft) {
     fun getScreen(): Screen? {
@@ -106,3 +107,10 @@ fun ResourceLoader.registerReloadListener(id: Identifier, reloader: Identifiable
 *///?}
 
 *///?}
+
+fun getKeyboardType(): InputConstants.Type {
+    //? <=26.2
+    //return InputConstants.Type.KEYSYM
+    //? >=26.3
+    return InputConstants.Type.KEYBOARD
+}

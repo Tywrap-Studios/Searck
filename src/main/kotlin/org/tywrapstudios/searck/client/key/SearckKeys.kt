@@ -9,8 +9,8 @@ import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
 /*import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 *///?}
 import net.minecraft.client.KeyMapping
-import org.lwjgl.glfw.GLFW
 import org.tywrapstudios.searck.Searck
+import org.tywrapstudios.searck.platform.getKeyboardType
 
 @Environment(EnvType.CLIENT)
 object SearckKeys {
@@ -27,8 +27,8 @@ object SearckKeys {
     *///?}
         KeyMapping(
             "key.searck.open_search",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_N,
+            getKeyboardType(),
+            InputConstants.KEY_N,
             CATEGORY,
         )
     )
@@ -40,8 +40,8 @@ object SearckKeys {
         *///?}
         KeyMapping(
             "key.searck.quick_action",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_ENTER,
+            getKeyboardType(),
+            InputConstants.KEY_RETURN,
             CATEGORY,
         )
     )
